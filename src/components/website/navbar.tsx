@@ -88,7 +88,7 @@ export function Navbar() {
           <span className='flex size-8 items-center justify-center rounded-lg border border-ring/30 bg-primary/10 font-mono text-[0.7rem] font-bold text-primary transition-shadow duration-300 group-hover:shadow-[0_0_14px_rgb(194_248_0/0.25)]'>
             FR
           </span>
-          <span className='hidden font-heading text-sm font-semibold tracking-wide sm:block'>
+          <span className='hidden font-heading text-sm lg:text-xl font-semibold tracking-wide sm:block'>
             {site.name}
           </span>
         </a>

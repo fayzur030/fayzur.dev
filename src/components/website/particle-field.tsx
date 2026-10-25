@@ -61,16 +61,27 @@ export function ParticleField() {
     let running = false
     let resizeTimer = 0
 
+    // function desiredCount(area: number, viewportWidth: number): number {
+    //   if (viewportWidth <= 640) {
+    //     return Math.round(Math.min(90, area / 6000))
+    //   }
+
+    //   if (viewportWidth <= 1024) {
+    //     return Math.round(Math.min(180, area / 9000))
+    //   }
+
+    //   return Math.round(Math.max(280, Math.min(600, area / 2800)))
+    // }
     function desiredCount(area: number, viewportWidth: number): number {
       if (viewportWidth <= 640) {
-        return Math.round(Math.min(90, area / 6000))
+        return Math.round(Math.min(25, area / 18000))
       }
 
       if (viewportWidth <= 1024) {
-        return Math.round(Math.min(180, area / 9000))
+        return Math.round(Math.min(50, area / 25000))
       }
 
-      return Math.round(Math.max(280, Math.min(600, area / 2800)))
+      return Math.round(Math.max(70, Math.min(120, area / 12000)))
     }
 
     const cv = canvas
@@ -104,7 +115,8 @@ export function ParticleField() {
         buf[o + 3] = (Math.random() - 0.5) * 0.6
 
         // Larger particle sizes.
-        buf[o + 4] = 0.8 + Math.random() * 0.8
+        buf[o + 4] = 1.5 + Math.random() * 1.5
+        // buf[o + 4] = 0.8 + Math.random() * 0.8
 
         buf[o + 5] = (Math.random() * ALPHA_LEVELS) | 0
         buf[o + 6] = COLOR_WEIGHTS[(Math.random() * COLOR_WEIGHTS.length) | 0]
@@ -153,8 +165,19 @@ export function ParticleField() {
 
         const o = order[s] * FLOATS_PER
 
+        // g2.beginPath()
+        // g2.arc(data[o], data[o + 1], data[o + 4], 0, Math.PI * 2)
+        // g2.fill()
+        const x = data[o]
+        const y = data[o + 1]
+        const r = data[o + 4]
+
         g2.beginPath()
-        g2.arc(data[o], data[o + 1], data[o + 4], 0, Math.PI * 2)
+        g2.moveTo(x, y - r * 1.5)
+        g2.lineTo(x + r, y)
+        g2.lineTo(x, y + r * 1.5)
+        g2.lineTo(x - r, y)
+        g2.closePath()
         g2.fill()
       }
     }
