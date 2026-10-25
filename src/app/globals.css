@@ -5,6 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-display: var(--font-space-grotesk);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
@@ -143,6 +144,13 @@
   --particles-tint: #c2f800;
 }
 
+/* 
+
+@theme inline {
+  --font-display: var(--font-space-grotesk);
+}
+*/
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -168,6 +176,10 @@
   }
 
   p {
+    /* text-wrap: pretty; */
+    font-family: var(--font-jetbrains-mono), monospace;
+  }
+  a {
     /* text-wrap: pretty; */
     font-family: var(--font-jetbrains-mono), monospace;
   }
