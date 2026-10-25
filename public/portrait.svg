@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 840" fill="none">
+  <!--
+    Portrait PLACEHOLDER — replace by adding your real photo at
+    public/profile.jpg (or .png/.webp) and switching `portrait.image` in
+    src/lib/portfolio.ts. Recruiters never see a random face.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1411"/>
+      <stop offset="0.55" stop-color="#101812"/>
+      <stop offset="1" stop-color="#080b0a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.28" r="0.75">
+      <stop offset="0" stop-color="#c2f800" stop-opacity="0.16"/>
+      <stop offset="0.6" stop-color="#4a7a1c" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#c2f800" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c2f800" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#c2f800" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="720" height="840" fill="url(#bg)"/>
+  <rect width="720" height="840" fill="url(#glow)"/>
+
+  <!-- subtle technical grid -->
+  <g stroke="#c2f800" stroke-opacity="0.06">
+    <path d="M0 120H720M0 240H720M0 360H720M0 480H720M0 600H720M0 720H720"/>
+    <path d="M120 0V840M240 0V840M360 0V840M480 0V840M600 0V840"/>
+  </g>
+
+  <!-- monogram disc -->
+  <circle cx="360" cy="380" r="196" stroke="url(#ring)" stroke-width="1.5"/>
+  <circle cx="360" cy="380" r="168" fill="#0f1512" fill-opacity="0.85" stroke="#c2f800" stroke-opacity="0.14"/>
+  <text x="360" y="418" text-anchor="middle" font-family="'DejaVu Sans Mono','Courier New',monospace" font-size="128" font-weight="700" fill="#c2f800" fill-opacity="0.92" letter-spacing="6">FR</text>
+
+  <!-- corner accents -->
+  <g stroke="#c2f800">
+    <path d="M36 110v-46a4 4 0 0 1 4-4h46" stroke-opacity="0.35" stroke-width="2"/>
+    <path d="M684 110v-46a4 4 0 0 0-4-4h-46" stroke-opacity="0.35" stroke-width="2"/>
+    <path d="M36 730v46a4 4 0 0 0 4 4h46" stroke-opacity="0.35" stroke-width="2"/>
+    <path d="M684 730v46a4 4 0 0 1-4 4h-46" stroke-opacity="0.35" stroke-width="2"/>
+  </g>
+
+  <!-- terminal-ish caption -->
+  <text x="360" y="712" text-anchor="middle" font-family="'DejaVu Sans Mono','Courier New',monospace" font-size="20" fill="#93a296" letter-spacing="4">&gt; full-stack developer</text>
+  <circle cx="212" cy="620" r="3" fill="#c2f800" fill-opacity="0.5"/>
+  <circle cx="512" cy="180" r="2.5" fill="#8fb55b" fill-opacity="0.45"/>
+</svg>
