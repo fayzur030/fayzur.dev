@@ -64,7 +64,10 @@ export default function About() {
   }
 
   return (
-    <section id='about' className='relative isolate py-24 sm:py-32'>
+    <section
+      id='about'
+      className='relative isolate w-full max-w-full overflow-x-clip py-16 sm:py-20 lg:py-32'
+    >
       {/* Background glow */}
       <div
         aria-hidden='true'
@@ -100,7 +103,7 @@ export default function About() {
             initial='hidden'
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
-            className='mx-auto w-full max-w-[340px] self-start lg:sticky lg:top-28'
+            className='mx-auto w-full max-w-[360px] self-start lg:sticky lg:top-28'
           >
             {/* Profile image */}
             <div className='group relative'>
