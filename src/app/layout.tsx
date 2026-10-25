@@ -80,18 +80,29 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className='min-h-full flex flex-col overflow-x-clip'>
-        {/* Decorative background layers — fixed, behind all content */}
+      <body className='relative min-h-screen overflow-x-clip bg-background text-foreground'>
+        {/* Background layers */}
         <div
           aria-hidden='true'
-          className='pointer-events-none fixed inset-0 z-0'
+          className='pointer-events-none fixed inset-0 z-0 overflow-hidden'
         >
+          <div
+            className='absolute inset-0'
+            style={{
+              background:
+                'linear-gradient(135deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end))',
+            }}
+          />
+
           <div className='glow-orb glow-orb--a' />
           <div className='glow-orb glow-orb--b' />
         </div>
-        <ParticleField />
+
         <CustomCursor />
-        {children}
+
+        <div className='relative z-10 flex min-h-screen flex-col'>
+          {children}
+        </div>
       </body>
     </html>
   )

@@ -54,94 +54,135 @@
  * Theme: default = LIGHT, `.dark` overrides (class is applied pre-paint by an
  * inline script; system preference wins on first visit).
  * ------------------------------------------------------------------------- */
-:root {
-  /* Light: soft sage paper */
-  --background: #f5f7f2;
-  --foreground: #182019;
-  --card: #ffffff;
-  --card-foreground: #182019;
-  --popover: #ffffff;
-  --popover-foreground: #182019;
-  /* Accessible green derived from the electric-lime brand hue */
-  --primary: #456f14;
-  --primary-foreground: #f5f7f2;
-  --secondary: #e9eee2;
-  --secondary-foreground: #232d23;
-  --muted: #e8ece3;
-  --muted-foreground: #5a6a5c;
-  --accent: #e4ecf3;
-  --accent-foreground: #20301f;
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: #ffffff;
-  --border: rgb(24 32 25 / 0.12);
-  --input: rgb(24 32 25 / 0.16);
-  --ring: #5e7d1c;
-  --chart-1: #456f14;
-  --chart-2: #6f8f3d;
-  --chart-3: #2f4f20;
-  --chart-4: #8fb80a;
-  --chart-5: #18300d;
-  --radius: 0.625rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #182019;
-  --sidebar-primary: #456f14;
-  --sidebar-primary-foreground: #f5f7f2;
-  --sidebar-accent: #e9eee2;
-  --sidebar-accent-foreground: #232d23;
-  --sidebar-border: rgb(24 32 25 / 0.12);
-  --sidebar-ring: #5e7d1c;
 
-  /* Design-system extras */
-  --accent-lime: #c2f800;
-  --glow-orb-a: rgb(194 248 0 / 0.14);
-  --glow-orb-b: rgb(120 170 90 / 0.12);
-  --glow-mouse: rgb(150 200 100 / 0.08);
-  --aqua-text: #10281d;
-  --particles-tint: #3f6212;
+/* Light Theme */
+:root {
+  color-scheme: light;
+
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+
+  --secondary: #eaf2ff;
+  --secondary-foreground: #1e3a8a;
+
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+
+  --accent: #e0f2fe;
+  --accent-foreground: #075985;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: rgb(15 23 42 / 0.1);
+  --input: rgb(15 23 42 / 0.14);
+  --ring: #3b82f6;
+
+  --chart-1: #2563eb;
+  --chart-2: #06b6d4;
+  --chart-3: #4f46e5;
+  --chart-4: #0d9488;
+  --chart-5: #7c3aed;
+
+  --radius: 0.75rem;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eff6ff;
+  --sidebar-accent-foreground: #1e40af;
+  --sidebar-border: rgb(15 23 42 / 0.1);
+  --sidebar-ring: #3b82f6;
+
+  /* Gradient and background effects */
+  --gradient-start: #f8fafc;
+  --gradient-middle: #eff6ff;
+  --gradient-end: #e0f2fe;
+
+  --glow-orb-a: rgb(37 99 235 / 0.12);
+  --glow-orb-b: rgb(6 182 212 / 0.1);
+  --glow-mouse: rgb(37 99 235 / 0.08);
+
+  --aqua-text: #075985;
+  --particles-tint: #2563eb;
+
+  --accent-blue: #2563eb;
+  --accent-cyan: #06b6d4;
 }
 
+/* Dark Theme */
 .dark {
-  /* Dark: near-black green */
-  --background: #080b0a;
-  --foreground: #e8efe9;
-  --card: #0e1311;
-  --card-foreground: #e8efe9;
-  --popover: #101513;
-  --popover-foreground: #e8efe9;
-  /* Electric lime accent */
-  --primary: #c2f800;
-  --primary-foreground: #131802;
-  --secondary: #131a16;
-  --secondary-foreground: #d9e4d8;
-  --muted: #141b17;
-  --muted-foreground: #93a296;
-  --accent: #1a241d;
-  --accent-foreground: #dff2d9;
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: #ffe7e3;
-  --border: rgb(232 239 233 / 0.09);
-  --input: rgb(232 239 233 / 0.12);
-  --ring: rgb(194 248 0 / 0.55);
-  --chart-1: #c2f800;
-  --chart-2: #8fb80a;
-  --chart-3: #456f14;
-  --chart-4: #2f4f20;
-  --chart-5: #18300d;
-  --sidebar: #0e1311;
-  --sidebar-foreground: #e8efe9;
-  --sidebar-primary: #c2f800;
-  --sidebar-primary-foreground: #131802;
-  --sidebar-accent: #1a241d;
-  --sidebar-accent-foreground: #dff2d9;
-  --sidebar-border: rgb(232 239 233 / 0.09);
-  --sidebar-ring: rgb(194 248 0 / 0.55);
+  color-scheme: dark;
 
-  --accent-lime: #c2f800;
-  --glow-orb-a: rgb(194 248 0 / 0.09);
-  --glow-orb-b: rgb(64 110 60 / 0.12);
-  --glow-mouse: rgb(194 248 0 / 0.06);
-  --aqua-text: #eafff8;
-  --particles-tint: #c2f800;
+  --background: #080d19;
+  --foreground: #f8fafc;
+
+  --card: #101827;
+  --card-foreground: #f8fafc;
+
+  --popover: #111827;
+  --popover-foreground: #f8fafc;
+
+  --primary: #38bdf8;
+  --primary-foreground: #082f49;
+
+  --secondary: #172033;
+  --secondary-foreground: #e2e8f0;
+
+  --muted: #131c2e;
+  --muted-foreground: #94a3b8;
+
+  --accent: #172554;
+  --accent-foreground: #bae6fd;
+
+  --destructive: #f87171;
+  --destructive-foreground: #450a0a;
+
+  --border: rgb(148 163 184 / 0.15);
+  --input: rgb(148 163 184 / 0.2);
+  --ring: #38bdf8;
+
+  --chart-1: #38bdf8;
+  --chart-2: #06b6d4;
+  --chart-3: #818cf8;
+  --chart-4: #2dd4bf;
+  --chart-5: #a78bfa;
+
+  --radius: 0.75rem;
+
+  --sidebar: #0b1220;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #38bdf8;
+  --sidebar-primary-foreground: #082f49;
+  --sidebar-accent: #172554;
+  --sidebar-accent-foreground: #bae6fd;
+  --sidebar-border: rgb(148 163 184 / 0.15);
+  --sidebar-ring: #38bdf8;
+
+  /* Gradient and background effects */
+  --gradient-start: #080d19;
+  --gradient-middle: #0b1120;
+  --gradient-end: #111c3a;
+
+  --glow-orb-a: rgb(37 99 235 / 0.18);
+  --glow-orb-b: rgb(6 182 212 / 0.12);
+  --glow-mouse: rgb(56 189 248 / 0.08);
+
+  --aqua-text: #e0f2fe;
+  --particles-tint: #38bdf8;
+
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
 }
 
 /* 
@@ -163,8 +204,13 @@
   }
 
   body {
+    min-height: 100vh;
     font-family: var(--font-inter), sans-serif;
     @apply bg-background text-foreground;
+    background-color: var(--background);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
   h1,
@@ -175,15 +221,8 @@
     text-wrap: balance;
   }
 
-  p {
-    /* text-wrap: pretty; */
-    font-family: var(--font-jetbrains-mono), monospace;
-  }
-  a {
-    /* text-wrap: pretty; */
-    font-family: var(--font-jetbrains-mono), monospace;
-  }
-
+  p,
+  a,
   code,
   pre,
   kbd,
