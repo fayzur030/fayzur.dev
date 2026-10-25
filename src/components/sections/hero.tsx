@@ -1,8 +1,11 @@
+'use client'
 import Image from 'next/image'
 import { ArrowRight, Sparkles, Send } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { GithubIcon, LinkedinIcon } from '@/components/website/brand-icons'
+import { motion } from 'framer-motion'
+import { Typewriter } from 'react-simple-typewriter'
 import { Reveal } from '@/components/website/reveal'
 import { site } from '@/lib/portfolio'
 import image from '@/assets/fayzur.png'
@@ -33,25 +36,39 @@ export function Hero() {
             ) : (
               <span className='inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/40 px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-widest text-muted-foreground'>
                 <Sparkles className='size-3 text-primary' aria-hidden='true' />
-                Portfolio — {new Date().getFullYear()}
+               Full-Stack Web Developer
               </span>
             )}
           </div>
-
+          {/* 
           <p className='mt-7 font-mono text-sm text-muted-foreground'>
-            Hi, I&apos;m{' '}
-            <span className='font-semibold text-foreground'>
-              {site.nameParts.first}
-            </span>
-          </p>
-          <h1 className='mt-2 font-heading text-5xl font-bold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl'>
+            Web Developer
+            <span className='font-semibold text-foreground'></span>
+          </p> */}
+          <h1 className='mt-2 font-heading text-4xl font-bold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl'>
             <span className='block'>
               {site.nameParts.first} {site.nameParts.accent}
             </span>
             <span className='mt-2 block text-primary drop-shadow-[0_0_28px_rgb(194_248_0/0.25)]'>
-              {site.role}
+              {site.name}
             </span>
           </h1>
+          <motion.h2
+            className='min-h-[40px] mt-3 text-lg md:text-2xl bg-gradient-to-r from-gray-300 via-lime-300 to-lime-400 bg-clip-text text-transparent'
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+          >
+            <Typewriter
+              words={[...site.roles]}
+              loop={0}
+              cursor
+              cursorStyle='_'
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1500}
+            />
+          </motion.h2>
 
           <p className='mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg'>
             {site.heroDescription}
