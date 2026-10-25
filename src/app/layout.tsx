@@ -1,35 +1,10 @@
 import type { Metadata, Viewport } from 'next'
-import {
-  Space_Grotesk,
-  Inter,
-  Space_Mono,
-  JetBrains_Mono,
-} from 'next/font/google'
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
-import { ParticleField } from '@/components/website/particle-field'
-import { CustomCursor } from '@/components/website/custom-cursor'
+
+// import { CustomCursor } from '@/components/website/custom-cursor'
 import { site } from '@/lib/portfolio'
-
-// const spaceGrotesk = Space_Grotesk({
-//   subsets: ['latin'],
-//   weight: ['500', '600', '700'],
-//   variable: '--font-space-grotesk',
-//   display: 'swap',
-// })
-
-// const inter = Inter({
-//   subsets: ['latin'],
-//   weight: ['400', '500', '600'],
-//   variable: '--font-inter',
-//   display: 'swap',
-// })
-
-// const spaceMono = Space_Mono({
-//   subsets: ['latin'],
-//   weight: ['400', '700'],
-//   variable: '--font-space-mono',
-//   display: 'swap',
-// })
+import CustomCursor from '@/components/website/custom-cursor'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -98,9 +73,8 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
           <div className='glow-orb glow-orb--b' />
         </div>
 
-        <CustomCursor />
-
         <div className='relative z-10 flex min-h-screen flex-col'>
+          <CustomCursor />
           {children}
         </div>
       </body>

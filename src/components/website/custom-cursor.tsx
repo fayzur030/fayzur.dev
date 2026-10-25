@@ -1,119 +1,133 @@
-"use client";
+'use client'
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react'
 
-/**
- * Desktop-only custom cursor (lime dot + smooth-following ring with hover
- * feedback) plus the mouse-responsive background glow. One rAF loop, no React
- * state, followers use lerp interpolation, everything cleaned up on unmount.
- * Disabled for touch/pointer:coarse devices and prefers-reduced-motion.
- */
-export function CustomCursor() {
-  const dotRef = useRef<HTMLDivElement | null>(null);
-  const ringRef = useRef<HTMLDivElement | null>(null);
-  const glowRef = useRef<HTMLDivElement | null>(null);
+const SEGMENTS = 18
+
+const CustomCursor = () => {
+  const segmentsRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
-    const dot = dotRef.current;
-    const ring = ringRef.current;
-    const glow = glowRef.current;
-    if (!dot || !ring || !glow) return;
+    const positions = Array.from({ length: SEGMENTS }, () => ({
+      x: -100,
+      y: -100,
+    }))
 
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduced) return;
+    let mouseX = -100
+    let mouseY = -100
+    let frameId = 0
 
-    // Opt in: hide the native cursor only while the custom one is active.
-    document.documentElement.classList.add("custom-cursor-on");
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
+    }
 
-    const mouse = { x: -100, y: -100 };
-    const ringPos = { x: -100, y: -100 };
-    const glowPos = { x: -100, y: -100 };
-    let hoverActive = false;
-    let raf = 0;
-    let visible = false;
+    const animate = () => {
+      positions[0].x += (mouseX - positions[0].x) * 0.45
+      positions[0].y += (mouseY - positions[0].y) * 0.45
 
-    const onPointerMove = (event: PointerEvent) => {
-      mouse.x = event.clientX;
-      mouse.y = event.clientY;
-      if (!visible) {
-        visible = true;
-        dot.style.opacity = "1";
-        ring.style.opacity = "1";
-        glow.style.opacity = "1";
+      for (let i = 1; i < SEGMENTS; i++) {
+        positions[i].x += (positions[i - 1].x - positions[i].x) * 0.35
+        positions[i].y += (positions[i - 1].y - positions[i].y) * 0.35
       }
-    };
 
-    // Delegated hover detection — no listeners on individual elements.
-    const isHoverable = (target: EventTarget | null) =>
-      target instanceof Element &&
-      target.closest("a, button, [role='button'], label, input, textarea, select, [data-cursor-hover]") !== null;
+      segmentsRef.current.forEach((segment, i) => {
+        if (!segment) return
 
-    const onOver = (event: MouseEvent) => {
-      hoverActive = isHoverable(event.target);
-      ring.dataset.active = hoverActive ? "true" : "false";
-      dot.dataset.active = hoverActive ? "true" : "false";
-    };
-    const onDown = () => {
-      dot.dataset.pressed = "true";
-      ring.dataset.pressed = "true";
-    };
-    const onUp = () => {
-      dot.dataset.pressed = "false";
-      ring.dataset.pressed = "false";
-    };
-    const onLeave = () => {
-      visible = false;
-      dot.style.opacity = "0";
-      ring.style.opacity = "0";
-      glow.style.opacity = "0";
-    };
+        const scale = 1 - (i / SEGMENTS) * 0.85
 
-    const GLOW_LERP = 0.05; // background glow: slowest, most "weighty"
-    const RING_LERP = 0.22;
-    const tick = () => {
-      ringPos.x += (mouse.x - ringPos.x) * RING_LERP;
-      ringPos.y += (mouse.y - ringPos.y) * RING_LERP;
-      glowPos.x += (mouse.x - glowPos.x) * GLOW_LERP;
-      glowPos.y += (mouse.y - glowPos.y) * GLOW_LERP;
+        segment.style.transform = `translate3d(
+          ${positions[i].x - 4 * scale}px,
+          ${positions[i].y - 4 * scale}px,
+          0
+        ) scale(${scale})`
 
-      dot.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0) translate(-50%, -50%)`;
-      ring.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`;
-      glow.style.transform = `translate3d(${glowPos.x}px, ${glowPos.y}px, 0) translate(-50%, -50%)`;
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
+        segment.style.opacity = String(1 - (i / SEGMENTS) * 0.9)
+      })
 
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    document.addEventListener("mouseover", onOver, { passive: true });
-    window.addEventListener("pointerdown", onDown, { passive: true });
-    window.addEventListener("pointerup", onUp, { passive: true });
-    document.documentElement.addEventListener("pointerleave", onLeave);
+      frameId = requestAnimationFrame(animate)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    frameId = requestAnimationFrame(animate)
 
     return () => {
-      cancelAnimationFrame(raf);
-      document.documentElement.classList.remove("custom-cursor-on");
-      window.removeEventListener("pointermove", onPointerMove);
-      document.removeEventListener("mouseover", onOver);
-      window.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointerup", onUp);
-      document.documentElement.removeEventListener("pointerleave", onLeave);
-    };
-  }, []);
+      window.removeEventListener('mousemove', handleMouseMove)
+      cancelAnimationFrame(frameId)
+    }
+  }, [])
 
   return (
-    <>
-      {/* Mouse-responsive background glow — sits with the other orbs, behind content */}
-      <div
-        ref={glowRef}
-        id="mouse-glow"
-        aria-hidden="true"
-        className="glow-orb pointer-events-none fixed z-0 opacity-0"
-        style={{ width: "38rem", height: "38rem", top: 0, left: 0 }}
-      />
-      {/* Cursor parts — never intercept pointer events */}
-      <div ref={ringRef} aria-hidden="true" className="cursor-ring pointer-events-none fixed z-[60] opacity-0" />
-      <div ref={dotRef} aria-hidden="true" className="cursor-dot pointer-events-none fixed z-[61] opacity-0" />
-    </>
-  );
+    <div className='pointer-events-none fixed inset-0 z-[9999] hidden md:block'>
+      {Array.from({ length: SEGMENTS }, (_, i) => (
+        <div
+          key={i}
+          ref={(el) => {
+            segmentsRef.current[i] = el
+          }}
+          className='absolute left-0 top-0 h-2 w-2 rounded-full bg-cyan-400'
+          style={{
+            opacity: 0,
+            boxShadow: `0 0 ${14 - i * 0.5}px rgba(6,182,212,${0.7 - i * 0.025})`,
+            willChange: 'transform',
+          }}
+        />
+      ))}
+    </div>
+  )
 }
+
+export default CustomCursor
+// /
+// 'use client'
+
+// import { useEffect, useState } from 'react'
+// import { motion } from 'framer-motion'
+
+// const CustomCursor = () => {
+//   const [position, setPosition] = useState({ x: -100, y: -100 })
+
+//   useEffect(() => {
+//     const handleMouseMove = (e: MouseEvent) => {
+//       setPosition({ x: e.clientX, y: e.clientY })
+//     }
+
+//     window.addEventListener('mousemove', handleMouseMove)
+
+//     return () => window.removeEventListener('mousemove', handleMouseMove)
+//   }, [])
+
+//   return (
+//     <div className="pointer-events-none fixed inset-0 z-[9999] hidden md:block">
+//       {/* Soft ambient glow */}
+//       <motion.div
+//         className="absolute h-20 w-20 rounded-full bg-blue-500/[0.08] blur-2xl"
+//         animate={{ x: position.x - 40, y: position.y - 40 }}
+//         transition={{ type: 'spring', stiffness: 100, damping: 25 }}
+//       />
+
+//       {/* Elegant outer ring */}
+//       <motion.div
+//         className="absolute h-9 w-9 rounded-full border border-blue-400/50"
+//         animate={{ x: position.x - 18, y: position.y - 18 }}
+//         transition={{ type: 'spring', stiffness: 180, damping: 24 }}
+//       />
+
+//       {/* Inner accent ring */}
+//       <motion.div
+//         className="absolute h-3 w-3 rounded-full border border-cyan-300/70"
+//         animate={{ x: position.x - 6, y: position.y - 6 }}
+//         transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+//       />
+
+//       {/* Crisp center dot */}
+//       <motion.div
+//         className="absolute h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(96,165,250,0.9)]"
+//         animate={{ x: position.x - 3, y: position.y - 3 }}
+//         transition={{ type: 'spring', stiffness: 700, damping: 35 }}
+//       />
+//     </div>
+//   )
+// }
+
+// export default CustomCursor
