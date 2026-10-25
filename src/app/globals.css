@@ -147,38 +147,50 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
-    @apply font-sans;
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
     text-size-adjust: 100%;
   }
+
+  body {
+    font-family: var(--font-inter), sans-serif;
+    @apply bg-background text-foreground;
+  }
+
   h1,
   h2,
   h3,
   h4 {
-    @apply font-heading;
+    font-family: var(--font-space-grotesk), sans-serif;
     text-wrap: balance;
   }
+
   p {
-    text-wrap: pretty;
+    /* text-wrap: pretty; */
+    font-family: var(--font-jetbrains-mono), monospace;
   }
-  ::selection {
-    background: #c2f800;
-    color: #101402;
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-jetbrains-mono), monospace;
   }
-  /* Theme toggle icons — pure CSS off the html class (hydration-safe) */
-  .dark .theme-icon-sun,
-  html:not(.dark) .theme-icon-moon {
-    display: none !important;
-  }
-  .dark .theme-icon-moon,
-  html:not(.dark) .theme-icon-sun {
-    display: block !important;
-  }
+}
+::selection {
+  background: #c2f800;
+  color: #101402;
+}
+/* Theme toggle icons — pure CSS off the html class (hydration-safe) */
+.dark .theme-icon-sun,
+html:not(.dark) .theme-icon-moon {
+  display: none !important;
+}
+.dark .theme-icon-moon,
+html:not(.dark) .theme-icon-sun {
+  display: block !important;
 }
 
 /* ---------------------------------------------------------------------------

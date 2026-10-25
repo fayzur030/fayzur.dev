@@ -1,37 +1,57 @@
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk, Inter, Space_Mono } from 'next/font/google'
+import {
+  Space_Grotesk,
+  Inter,
+  Space_Mono,
+  JetBrains_Mono,
+} from 'next/font/google'
 import './globals.css'
 import { ParticleField } from '@/components/website/particle-field'
 import { CustomCursor } from '@/components/website/custom-cursor'
 import { site } from '@/lib/portfolio'
 
+// const spaceGrotesk = Space_Grotesk({
+//   subsets: ['latin'],
+//   weight: ['500', '600', '700'],
+//   variable: '--font-space-grotesk',
+//   display: 'swap',
+// })
+
+// const inter = Inter({
+//   subsets: ['latin'],
+//   weight: ['400', '500', '600'],
+//   variable: '--font-inter',
+//   display: 'swap',
+// })
+
+// const spaceMono = Space_Mono({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+//   variable: '--font-space-mono',
+//   display: 'swap',
+// })
+
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
   variable: '--font-space-grotesk',
-  display: 'swap',
 })
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
   variable: '--font-inter',
-  display: 'swap',
 })
 
-const spaceMono = Space_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
-  display: 'swap',
+  variable: '--font-jetbrains-mono',
 })
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.role}`,
+  title: `${site.name} — ${site.roles}`,
   description:
     'Single-page portfolio of Fayzur Rahman, a full-stack web developer building modern, responsive, user-friendly web applications.',
   openGraph: {
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} — ${site.roles}`,
     description: site.heroDescription,
     type: 'website',
   },
@@ -55,7 +75,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html
       lang='en'
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
