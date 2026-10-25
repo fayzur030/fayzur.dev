@@ -12,17 +12,17 @@ const Photo = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
-        className='relative flex h-[300px] w-[300px] items-center justify-center xl:h-[506px] xl:w-[506px]'
+        className='relative flex h-[260px] w-[260px] items-center justify-center sm:h-[350px] sm:w-[350px] lg:h-[340px] lg:w-[370px] xl:h-[450px] xl:w-[450px]'
       >
         {/* Profile Image */}
-        <div className='absolute inset-[2%] overflow-hidden rounded-full mix-blend-lighten'>
+        <div className='absolute inset-[4%] overflow-hidden rounded-full mix-blend-lighten'>
           <Image
             src={image}
             alt='Fayzur Rahman'
             fill
             priority
-            sizes='(max-width: 640px) 280px, (max-width: 1280px) 380px, 498px'
-            className='object-contain '
+            sizes='(max-width: 640px) 250px, (max-width: 1024px) 290px, (max-width: 1280px) 330px, 400px'
+            className='object-contain'
           />
         </div>
 
@@ -37,7 +37,7 @@ const Photo = () => {
           <motion.circle
             cx='253'
             cy='253'
-            r='250'
+            r='235'
             stroke='#C0F700'
             strokeWidth='3'
             strokeLinecap='round'

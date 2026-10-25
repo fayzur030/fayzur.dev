@@ -1,7 +1,7 @@
 'use client'
 
-import { Send, ArrowDownToLine } from 'lucide-react'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { ArrowDownToLine } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { GithubIcon, LinkedinIcon } from '@/components/website/brand-icons'
 import { motion } from 'framer-motion'
@@ -12,11 +12,17 @@ import Photo from '../website/photo'
 
 export function Hero() {
   const socials = [
-    { label: 'GitHub', href: site.links.github || '#contact' },
-    { label: 'LinkedIn', href: site.links.linkedin || '#contact' },
+    {
+      label: 'GitHub',
+      href: 'https://github.com/fayzur030',
+    },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/md-fayzur-rahman/',
+    },
   ]
 
-  const unconfigured = !site.links.github || !site.links.linkedin
+  const unconfined = !site.links.github || !site.links.linkedin
 
   return (
     <section
@@ -26,8 +32,8 @@ export function Hero() {
       <div className='mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10'>
         {/* Left: Introduction */}
         <Reveal className='order-2 lg:order-1'>
-          <h1 className='mt-2 font-heading text-4xl font-semibold leading-[1.12] tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl'>
-            <span className='block'>
+          <h1 className='mt-2 font-heading text-4xl font-semibold  text-slate-900 dark:text-white sm:text-5xl lg:text-6xl'>
+            <span className='block text-xl leading-[1.12]  dark:text-gray-400'>
               {site.nameParts.first} {site.nameParts.accent}
             </span>
 
@@ -36,7 +42,7 @@ export function Hero() {
             </span>
           </h1>
           <motion.h2
-            className='mt-4 min-h-[32px] bg-gradient-to-r from-emerald-700 via-lime-700 to-green-600 bg-clip-text text-base font-medium tracking-wide text-transparent dark:from-gray-300 dark:via-lime-300 dark:to-lime-400 sm:text-lg md:text-xl'
+            className='mt-4 min-h-8 bg-linear-to-r from-emerald-700 via-lime-700 to-green-600 bg-clip-text text-base font-medium tracking-wide text-transparent dark:from-gray-300 dark:via-lime-300 dark:to-lime-400 sm:text-lg md:text-xl'
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
@@ -55,13 +61,16 @@ export function Hero() {
             {site.heroDescription}
           </p>
           {/* CTA Buttons */}
-          <div className='mt-8 flex flex-wrap items-center gap-3'>
+
+          {/* CTA Buttons & Social Links */}
+          <div className='mt-8 flex flex-wrap items-center gap-4'>
+            {/* Download CV */}
             <a
               href='/Fayzur-Rahman-CV.pdf'
               download
               className={cn(
                 buttonVariants({ variant: 'aqua', size: 'lg' }),
-                'group h-11 gap-2 rounded-xl px-5 text-sm font-semibold shadow-[0_0_20px_rgb(194_248_0/0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_25px_rgb(194_248_0/0.2)]'
+                'group h-11 gap-2 rounded-xl px-5 text-sm font-semibold shadow-[0_0_20px_rgb(194_248_0/0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_25px_rgb(194_248_0/0.2)] '
               )}
             >
               <span>Download CV</span>
@@ -71,53 +80,31 @@ export function Hero() {
               />
             </a>
 
-            {/* Contact Me */}
-            <a
-              href='#contact'
-              className={cn(
-                buttonVariants({ variant: 'aqua-outline', size: 'lg' }),
-                'group h-11 gap-2 rounded-xl border border-slate-300 bg-white/70 px-5 text-sm font-semibold text-slate-800 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary/5 dark:border-white/15 dark:bg-white/[0.03] dark:text-white dark:hover:border-primary/50 dark:hover:bg-primary/[0.06]'
-              )}
-            >
-              <Send
-                className='size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5'
-                aria-hidden='true'
-              />
-              <span>Contact Me</span>
-            </a>
-          </div>
-
-          {/* Social Links */}
-          <div className='mt-7 flex items-center gap-3'>
-            <span className='font-mono text-[0.65rem] uppercase tracking-[0.16em] text-slate-500 dark:text-muted-foreground/70'>
-              Find me
-            </span>
-
-            <span
-              className='h-px w-8 bg-slate-300 dark:bg-border'
-              aria-hidden='true'
-            />
-
-            {socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                title={
-                  unconfigured
-                    ? 'Add your real link in src/lib/portfolio.ts'
-                    : social.label
-                }
-                className='inline-flex size-9 items-center justify-center rounded-lg border border-slate-300 text-slate-600 transition-all duration-300 hover:border-primary hover:text-slate-950 dark:border-border/70 dark:text-muted-foreground dark:hover:border-ring/40 dark:hover:text-foreground'
-              >
-                <span className='sr-only'>{social.label}</span>
-
-                {social.label === 'GitHub' ? (
-                  <GithubIcon className='size-4' />
-                ) : (
-                  <LinkedinIcon className='size-4' />
-                )}
-              </a>
-            ))}
+            {/* Social Links */}
+            <div className='flex items-center gap-3'>
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  title={
+                    unconfined
+                      ? 'Add your real link in src/lib/portfolio.ts'
+                      : social.label
+                  }
+                  aria-label={social.label}
+                  // className='inline-flex size-11 items-center justify-center rounded-xl border border-slate-300 text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-slate-950 dark:border-border/70 dark:text-muted-foreground dark:hover:border-ring/40 dark:hover:text-foreground'
+                  className='flex size-9 items-center justify-center rounded-full border border-slate-300 bg-white/70 text-slate-600 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.03] dark:text-muted-foreground dark:hover:border-primary dark:hover:bg-primary dark:hover:text-slate-950'
+                >
+                  {social.label === 'GitHub' ? (
+                    <GithubIcon className='size-4' />
+                  ) : (
+                    <LinkedinIcon className='size-4' />
+                  )}
+                </a>
+              ))}
+            </div>
           </div>
         </Reveal>
 

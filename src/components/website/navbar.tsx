@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react'
 import { cn } from 'cn'
 import { navLinks, site } from '@/lib/portfolio'
 import { ThemeToggle } from '@/components/website/theme-toggle'
+import Link from 'next/link'
 
 const SECTIONS = navLinks.map((l) => l.href.slice(1))
 
@@ -84,14 +85,14 @@ export function Navbar() {
         aria-label='Primary'
       >
         {/* Logo */}
-        <a href='#hero' className='group flex items-center gap-2.5'>
+        <Link href='#hero' className='group flex items-center gap-2.5'>
           <span className='flex size-8 items-center justify-center rounded-lg border border-ring/30 bg-primary/10 font-mono text-[0.7rem] font-bold text-primary transition-shadow duration-300 group-hover:shadow-[0_0_14px_rgb(194_248_0/0.25)]'>
             FR
           </span>
           <span className='hidden font-heading text-sm lg:text-xl font-semibold tracking-wide sm:block'>
             {site.name}
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <ul className='hidden items-center gap-1 md:flex'>
