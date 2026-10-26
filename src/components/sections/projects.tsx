@@ -7,7 +7,7 @@ import { projects } from "@/lib/portfolio";
 export function Projects() {
   return (
     <section id="projects" className="relative z-10 px-4 py-24 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <SectionHeading
           index="03 / projects"
           title="Featured projects"

@@ -45,6 +45,15 @@ const journey = [
   },
 ]
 
+const borderColors = [
+  'hover:border-cyan-400/50 dark:hover:border-cyan-400/40',
+  'hover:border-violet-400/50 dark:hover:border-violet-400/40',
+  'hover:border-emerald-400/50 dark:hover:border-emerald-400/40',
+  'hover:border-amber-400/50 dark:hover:border-amber-400/40',
+  'hover:border-rose-400/50 dark:hover:border-rose-400/40',
+  'hover:border-blue-400/50 dark:hover:border-blue-400/40',
+]
+
 export default function About() {
   const shouldReduceMotion = useReducedMotion()
 
@@ -88,7 +97,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <SectionHeading
-            index=''
+            index='02 / about '
             eyebrow='GET TO KNOW ME'
             title='About Me'
             description='A little about my journey, mindset, and passion for building things.'
@@ -223,16 +232,18 @@ export default function About() {
                               transition: { duration: 0.2 },
                             }
                       }
-                      className='relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white/70 p-5 transition-colors duration-300 hover:border-cyan-500/40 dark:border-white/10 dark:bg-white/[0.025] dark:hover:border-lime-400/30 sm:p-6'
+                      className={`group relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white/70 p-5 transition-all duration-500 hover:shadow-[0_0_25px_rgba(34,211,238,0.06)] dark:border-white/10 dark:bg-white/[0.025] sm:p-6 ${
+                        borderColors[index % borderColors.length]
+                      }`}
                     >
-                      {/* Hover glow */}
+                      {/* Hover gradient */}
                       <div
                         aria-hidden='true'
-                        className='pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/[0.05] via-transparent to-lime-400/[0.05] opacity-0 transition-opacity duration-500 group-hover:opacity-100'
-                        // className='pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-blue-500/0 via-cyan-400/0 to-blue-500/0 opacity-0 blur-xl transition-all duration-500 group-hover:from-blue-500/25 group-hover:via-cyan-400/20 group-hover:to-blue-500/25 group-hover:opacity-100'
+                        className='pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/[0.05] via-transparent to-emerald-400/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100'
                       />
 
-                      <div className='relative'>
+                      {/* Card content */}
+                      <div className='relative z-10'>
                         {/* Card label */}
                         <div className='flex items-center justify-between gap-3'>
                           <span className='text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400'>
@@ -246,7 +257,7 @@ export default function About() {
 
                         {/* Card title */}
                         <div className='mt-4 flex items-center gap-3'>
-                          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/10 text-cyan-600 transition-colors duration-300 group-hover:border-lime-500/30 group-hover:bg-lime-500/10 group-hover:text-lime-600 dark:text-cyan-400 dark:group-hover:text-lime-400'>
+                          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/10 text-cyan-600 transition-all duration-300 group-hover:scale-110 group-hover:border-lime-500/30 group-hover:bg-lime-500/10 group-hover:text-lime-600 dark:text-cyan-400 dark:group-hover:text-lime-400'>
                             <Icon size={20} strokeWidth={1.8} />
                           </div>
 
