@@ -1004,3 +1004,21 @@ html.custom-cursor-on *::after {
     transform: scaleX(1);
   }
 }
+
+/* skills icon */
+.skill-icon {
+  color: var(--skill-color);
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.12);
+}
+
+.skill-progress-fill {
+  width: var(--skill-level);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--skill-color);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--skill-color) 35%, transparent);
+}
