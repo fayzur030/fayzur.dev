@@ -97,7 +97,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <SectionHeading
-            index='02 / about '
+            index='01 / about '
             eyebrow='GET TO KNOW ME'
             title='About Me'
             description='A little about my journey, mindset, and passion for building things.'

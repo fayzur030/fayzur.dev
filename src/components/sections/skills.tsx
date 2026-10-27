@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-import type { CSSProperties } from 'react'
 import {
   SiReact,
   SiNextdotjs,
@@ -9,125 +7,136 @@ import {
   SiTypescript,
   SiTailwindcss,
   SiNodedotjs,
-  SiMongodb,
   SiExpress,
+  SiMongodb,
   SiGit,
   SiGithub,
   SiPostman,
   SiVercel,
 } from 'react-icons/si'
+
+import {
+  PanelsTopLeft,
+  Server,
+  Database,
+  Cloud,
+  Code2,
+  ArrowUpRight,
+} from 'lucide-react'
+
 import type { IconType } from 'react-icons'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { SectionHeading } from '../website/section-heading'
 
-interface Skill {
+interface Technology {
   name: string
-  icon: IconType
+  icon?: IconType
   color: string
-  category: string
-  level: number
 }
 
-const skills: Skill[] = [
+interface SkillCategory {
+  title: string
+  subtitle: string
+  icon: typeof Code2
+  technologies: Technology[]
+  className?: string
+}
+
+const skillCategories: SkillCategory[] = [
   {
-    name: 'React',
-    icon: SiReact,
-    color: '#61DAFB',
-    category: 'Frontend',
-    level: 95,
+    title: 'Front-end',
+    subtitle: 'Building modern and interactive user interfaces',
+    icon: PanelsTopLeft,
+    className: 'lg:col-span-2',
+    technologies: [
+      { name: 'React', icon: SiReact, color: '#61DAFB' },
+      { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
+      { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+      { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+    ],
   },
   {
-    name: 'Next.js',
-    icon: SiNextdotjs,
-    color: '#FFFFFF',
-    category: 'Frontend',
-    level: 95,
+    title: 'Back-end',
+    subtitle: 'Server-side logic and API development',
+    icon: Server,
+    technologies: [
+      { name: 'Node.js', icon: SiNodedotjs, color: '#5FA04E' },
+      { name: 'Express.js', icon: SiExpress, color: '#FFFFFF' },
+    ],
   },
   {
-    name: 'JavaScript',
-    icon: SiJavascript,
-    color: '#F7DF1E',
-    category: 'Language',
-    level: 90,
+    title: 'Database',
+    subtitle: 'Data storage and management',
+    icon: Database,
+    technologies: [{ name: 'MongoDB', icon: SiMongodb, color: '#47A248' }],
   },
   {
-    name: 'TypeScript',
-    icon: SiTypescript,
-    color: '#3178C6',
-    category: 'Language',
-    level: 95,
+    title: 'Tools & Deployment',
+    subtitle: 'Version control and deployment workflows',
+    icon: Cloud,
+    className: 'lg:col-span-2',
+    technologies: [
+      { name: 'Git', icon: SiGit, color: '#F05032' },
+      { name: 'GitHub', icon: SiGithub, color: '#FFFFFF' },
+      { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
+      { name: 'Vercel', icon: SiVercel, color: '#FFFFFF' },
+    ],
   },
   {
-    name: 'Tailwind CSS',
-    icon: SiTailwindcss,
-    color: '#06B6D4',
-    category: 'Styling',
-    level: 95,
-  },
-  {
-    name: 'Node.js',
-    icon: SiNodedotjs,
-    color: '#5FA04E',
-    category: 'Backend',
-    level: 90,
-  },
-  {
-    name: 'Express.js',
-    icon: SiExpress,
-    color: '#FFFFFF',
-    category: 'Backend',
-    level: 85,
-  },
-  {
-    name: 'MongoDB',
-    icon: SiMongodb,
-    color: '#47A248',
-    category: 'Database',
-    level: 90,
-  },
-  {
-    name: 'Git',
-    icon: SiGit,
-    color: '#F05032',
-    category: 'Tools',
-    level: 75,
-  },
-  {
-    name: 'GitHub',
-    icon: SiGithub,
-    color: '#FFFFFF',
-    category: 'Tools',
-    level: 80,
-  },
-  {
-    name: 'Postman',
-    icon: SiPostman,
-    color: '#FF6C37',
-    category: 'Tools',
-    level: 75,
-  },
-  {
-    name: 'Vercel',
-    icon: SiVercel,
-    color: '#FFFFFF',
-    category: 'Deployment',
-    level: 75,
+    title: 'Programming Languages',
+    subtitle: 'Writing clean and maintainable code',
+    icon: Code2,
+    className: 'lg:col-span-2',
+    technologies: [
+      { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+      { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+    ],
   },
 ]
 
-// Generate categories from the skills data automatically.
-const categories = [
-  'All',
-  ...Array.from(new Set(skills.map((skill) => skill.category))),
-]
+function TechnologyBadge({ technology }: { technology: Technology }) {
+  const Icon = technology.icon
+  const isWhite = technology.color.toUpperCase() === '#FFFFFF'
+
+  return (
+    <div className='group/badge inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-100/80 px-3 py-2 transition-all duration-300 hover:border-[#C2F800]/60 hover:bg-[#C2F800]/10 dark:border-white/[0.07] dark:bg-white/[0.035] dark:hover:border-[#C2F800]/30 dark:hover:bg-[#C2F800]/5'>
+      {Icon ? (
+        <Icon
+          className={`h-3.5 w-3.5 shrink-0 ${
+            isWhite ? 'text-zinc-800 dark:text-zinc-200' : ''
+          }`}
+          style={isWhite ? undefined : { color: technology.color }}
+          aria-hidden='true'
+        />
+      ) : (
+        <span
+          className='h-1.5 w-1.5 shrink-0 rounded-full'
+          style={{ backgroundColor: technology.color }}
+        />
+      )}
+
+      <span className='whitespace-nowrap text-xs font-medium text-zinc-700 transition-colors duration-300 group-hover/badge:text-zinc-950 dark:text-zinc-400 dark:group-hover/badge:text-[#C2F800]'>
+        {technology.name}
+      </span>
+    </div>
+  )
+}
 
 export default function SkillsSection() {
   const shouldReduceMotion = useReducedMotion()
-  const [activeCategory, setActiveCategory] = useState('All')
-
   const reduceMotion = shouldReduceMotion ?? false
 
-  const fadeUp = {
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduceMotion ? 0 : 0.12,
+      },
+    },
+  }
+
+  const cardVariants = {
     hidden: {
       opacity: 0,
       y: reduceMotion ? 0 : 24,
@@ -136,210 +145,123 @@ export default function SkillsSection() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: reduceMotion ? 0 : 0.6,
+        duration: reduceMotion ? 0 : 0.55,
         ease: 'easeOut' as const,
       },
     },
   }
 
-  const filteredSkills =
-    activeCategory === 'All'
-      ? skills
-      : skills.filter((skill) => skill.category === activeCategory)
-
   return (
-    <section id='skills' className='isolate overflow-hidden px-4 py-20'>
-      <div className='skills-container mx-auto w-full max-w-7xl'>
+    <section
+      id='skills'
+      className='  px-4 py-20 text-zinc-900 transition-colors duration-300  dark:text-white sm:px-6 sm:py-24 lg:px-8 lg:py-28'
+    >
+      {/* Background Accent */}{' '}
+      <div
+        aria-hidden='true'
+        className='pointer-events-none absolute -top-40 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-[#C2F800]/8 blur-[120px] dark:bg-[#C2F800]/[0.035]'
+      />
+      <div className='relative mx-auto max-w-6xl'>
         {/* Section Heading */}
         <motion.div
-          initial='hidden'
-          whileInView='visible'
-          viewport={{ once: true, amount: 0.15 }}
-          variants={fadeUp}
-          className='skills-heading mb-10 text-left'
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.6,
+            ease: 'easeOut',
+          }}
+          className='mb-10 sm:mb-12'
         >
           <SectionHeading
-            index='03 / skills'
-            eyebrow='MY TECH STACK'
-            title='Technical Skills'
+            index='02 / skill'
+            title='Skills & Technologies'
             description='Technologies and tools I use to build modern, responsive, and scalable web applications.'
           />
         </motion.div>
 
-        {/* Category Filters */}
-        <div
-          className='mb-8 flex flex-wrap gap-3'
-          role='group'
-          aria-label='Filter skills by category'
-        >
-          {categories.map((category) => {
-            const isActive = activeCategory === category
+        {/* Section Label */}
 
-            const count =
-              category === 'All'
-                ? skills.length
-                : skills.filter((skill) => skill.category === category).length
+        {/* Skills Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.05 }}
+          className='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'
+        >
+          {skillCategories.map((category) => {
+            const CategoryIcon = category.icon
 
             return (
-              <button
-                key={category}
-                type='button'
-                onClick={() => setActiveCategory(category)}
-                aria-pressed={isActive}
-                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? 'border-cyan-500 bg-cyan-50 text-cyan-700 shadow-[0_0_18px_rgba(34,211,238,0.10)] dark:border-cyan-400/70 dark:bg-cyan-400/10 dark:text-cyan-300'
-                    : 'border-zinc-200 bg-white text-zinc-600 hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700 dark:border-white/10 dark:bg-white/[0.025] dark:text-zinc-400 dark:hover:border-cyan-400/40 dark:hover:bg-cyan-400/[0.05] dark:hover:text-cyan-300'
-                }`}
+              <motion.article
+                key={category.title}
+                variants={cardVariants}
+                className={`group relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white/70 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:bg-linear-to-br hover:from-cyan-50 hover:via-blue-50 hover:to-purple-50 hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] dark:border-white/10 dark:bg-white/2.5 dark:shadow-none dark:hover:border-cyan-400/30 dark:hover:from-cyan-400/8 dark:hover:via-blue-500/8 dark:hover:to-purple-500/8 dark:hover:shadow-[0_8px_35px_rgba(59,130,246,0.12)] sm:p-6 ${category.className ?? ''}`}
               >
-                {category}
-                <span className='ml-2 text-xs opacity-70'>{count}</span>
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Animated Skill Cards */}
-        <AnimatePresence mode='wait' initial={false}>
-          <motion.div
-            key={activeCategory}
-            initial='hidden'
-            animate='visible'
-            exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: reduceMotion ? 0 : 0.1,
-                },
-              },
-            }}
-            className='skills-cards grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-          >
-            {filteredSkills.map((skill) => {
-              const Icon = skill.icon
-              const isWhite = skill.color.toUpperCase() === '#FFFFFF'
-
-              return (
-                <motion.article
-                  key={skill.name}
-                  variants={fadeUp}
-                  className='group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all duration-500 hover:border-cyan-300 hover:shadow-[0_8px_30px_rgba(34,211,238,0.10)] dark:border-white/10 dark:bg-white/[0.025] dark:shadow-none sm:p-6'
-                  style={
-                    {
-                      '--skill-color': skill.color,
-                      '--skill-level': `${skill.level}%`,
-                    } as CSSProperties
-                  }
-                >
-                  {/* Hover Gradient */}
-                  <div
-                    aria-hidden='true'
-                    className='pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/[0.05] via-transparent to-emerald-400/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100'
-                  />
-
-                  {/* Hover Glow */}
-                  <div
-                    aria-hidden='true'
-                    className='pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-20'
-                    style={{ backgroundColor: skill.color }}
-                  />
-
-                  {/* Card Content */}
-                  <div className='relative z-10'>
-                    {/* Icon and Category */}
-                    <div className='mb-5 flex items-center justify-between gap-3'>
-                      <div
-                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-300 group-hover:bg-cyan-50 dark:border-white/10 dark:bg-white/[0.04] dark:group-hover:border-cyan-400/30 dark:group-hover:bg-cyan-400/10 ${
-                          isWhite ? 'text-zinc-900 dark:text-white' : ''
-                        }`}
-                        style={isWhite ? undefined : { color: skill.color }}
-                      >
-                        <Icon size={25} aria-hidden='true' />
-                      </div>
-
-                      <span className='rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 transition-colors duration-300 group-hover:border-cyan-200 group-hover:bg-cyan-50 group-hover:text-cyan-700 dark:border-white/10 dark:bg-white/[0.03] dark:text-zinc-400 dark:group-hover:border-cyan-400/30 dark:group-hover:bg-cyan-400/10 dark:group-hover:text-cyan-400'>
-                        {skill.category}
-                      </span>
+                {/* Card Glow */}{' '}
+                <div
+                  aria-hidden='true'
+                  className='pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/6 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100'
+                />
+                {/* Top Accent */}
+                <div className='absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-linear-to-r from-cyan-400/60 via-emerald-400/30 to-transparent transition-transform duration-500 group-hover:scale-x-100' />
+                {/* Category Heading */}
+                <div className='relative mb-6 flex items-start justify-between gap-3'>
+                  <div className='flex min-w-0 items-start gap-3'>
+                    <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-200/80 bg-cyan-50 text-cyan-600 transition-all duration-300 group-hover:scale-105 group-hover:border-cyan-300 group-hover:bg-cyan-100 dark:border-white/10 dark:bg-white/4 dark:text-cyan-400 dark:group-hover:border-cyan-400/30 dark:group-hover:bg-cyan-400/8'>
+                      <CategoryIcon size={18} strokeWidth={1.8} />
                     </div>
 
-                    {/* Skill Name */}
-                    <h3 className='mb-5 text-base font-semibold text-zinc-900 dark:text-white'>
-                      {skill.name}
-                    </h3>
+                    <div className='min-w-0'>
+                      <h3 className='text-lg font-semibold text-zinc-900 transition-colors duration-300 group-hover:text-cyan-700 dark:text-white dark:group-hover:text-cyan-400 sm:text-xl'>
+                        {category.title}
+                      </h3>
 
-                    {/* Proficiency */}
-                    <div className='mb-2 flex items-center justify-between text-xs'>
-                      <span className='font-medium text-zinc-600 dark:text-zinc-400'>
-                        Proficiency
-                      </span>
-
-                      <span
-                        className={`font-semibold ${
-                          isWhite ? 'text-zinc-900 dark:text-white' : ''
-                        }`}
-                        style={isWhite ? undefined : { color: skill.color }}
-                      >
-                        {skill.level}%
-                      </span>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div
-                      className='h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700/70'
-                      role='progressbar'
-                      aria-label={`${skill.name} proficiency`}
-                      aria-valuenow={skill.level}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                    >
-                      <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          isWhite ? 'bg-zinc-900 dark:bg-white' : ''
-                        }`}
-                        style={{
-                          width: `${skill.level}%`,
-                          ...(isWhite ? {} : { backgroundColor: skill.color }),
-                        }}
-                      />
+                      <p className='mt-1 text-xs leading-5 text-zinc-600 dark:text-zinc-400'>
+                        {category.subtitle}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Bottom Shine */}
-                  <div
+                  <ArrowUpRight
+                    size={17}
+                    className='shrink-0 text-zinc-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-cyan-600 dark:text-zinc-500 dark:group-hover:text-cyan-400'
                     aria-hidden='true'
-                    className='pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-70'
                   />
-                </motion.article>
-              )
-            })}
-          </motion.div>
-        </AnimatePresence>
+                </div>
+                {/* Technology Badges */}
+                <div className='relative flex flex-wrap gap-2'>
+                  {category.technologies.map((technology) => (
+                    <TechnologyBadge
+                      key={technology.name}
+                      technology={technology}
+                    />
+                  ))}
+                </div>
+                {/* Bottom Accent */}
+                <div className='absolute inset-x-5 bottom-0 h-px origin-left scale-x-0 bg-linear-to-r from-cyan-400/60 to-emerald-400/40 transition-transform duration-500 group-hover:scale-x-100 sm:inset-x-6' />
+              </motion.article>
+            )
+          })}
+        </motion.div>
 
         {/* Footer */}
         <motion.div
-          initial='hidden'
-          whileInView='visible'
-          viewport={{ once: true }}
-          variants={{
-            hidden: {
-              opacity: 0,
-              y: reduceMotion ? 0 : 12,
-            },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: {
-                duration: reduceMotion ? 0 : 0.5,
-                ease: 'easeOut' as const,
-              },
-            },
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.5,
+            ease: 'easeOut',
           }}
-          className='skills-footer mt-12 flex items-center justify-center gap-4 text-center text-[10px] font-medium tracking-[0.2em] text-slate-500 sm:text-xs'
+          className='mt-10 flex flex-wrap items-center justify-center gap-3 text-center text-[9px] font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400 sm:mt-12 sm:text-[10px] sm:tracking-[0.22em]'
         >
-          <span className='h-px max-w-20 flex-1 bg-slate-300 dark:bg-slate-700' />
-          <span>ALWAYS LEARNING · ALWAYS BUILDING</span>
-          <span className='h-px max-w-20 flex-1 bg-slate-300 dark:bg-slate-700' />
+          <span className='h-px w-6 bg-lime-600/60 dark:bg-[#C2F800]/60 sm:w-12' />
+          <span>Built with passion</span>
+          <span className='text-lime-700 dark:text-[#C2F800]'>•</span>
+          <span>Powered by technology</span>
+          <span className='h-px w-6 bg-lime-600/60 dark:bg-[#C2F800]/60 sm:w-12' />
         </motion.div>
       </div>
     </section>
