@@ -40,14 +40,14 @@ const skills: Skill[] = [
     icon: SiReact,
     color: '#61DAFB',
     category: 'Frontend',
-    level: 90,
+    level: 95,
   },
   {
     name: 'Next.js',
     icon: SiNextdotjs,
     color: '#FFFFFF',
     category: 'Frontend',
-    level: 85,
+    level: 95,
   },
 
   {
@@ -55,14 +55,14 @@ const skills: Skill[] = [
     icon: SiJavascript,
     color: '#F7DF1E',
     category: 'Language',
-    level: 88,
+    level: 90,
   },
   {
     name: 'TypeScript',
     icon: SiTypescript,
     color: '#3178C6',
     category: 'Language',
-    level: 85,
+    level: 95,
   },
 
   {
@@ -78,14 +78,14 @@ const skills: Skill[] = [
     icon: SiNodedotjs,
     color: '#5FA04E',
     category: 'Backend',
-    level: 70,
+    level: 90,
   },
   {
     name: 'Express.js',
     icon: SiExpress,
     color: '#FFFFFF',
     category: 'Backend',
-    level: 65,
+    level: 85,
   },
 
   {
@@ -93,7 +93,7 @@ const skills: Skill[] = [
     icon: SiMongodb,
     color: '#47A248',
     category: 'Database',
-    level: 70,
+    level: 90,
   },
 
   // {
