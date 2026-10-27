@@ -216,10 +216,10 @@ export default function SkillsSection() {
                 type='button'
                 onClick={() => setActiveCategory(category)}
                 aria-pressed={isActive}
-                className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? 'border-cyan-400/70 bg-cyan-400/10 text-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.12)]'
-                    : 'border-slate-700/70 bg-slate-900/50 text-slate-400 hover:border-cyan-400/40 hover:text-cyan-300'
+                    ? 'border-cyan-500 bg-cyan-50 text-cyan-700 shadow-[0_0_18px_rgba(34,211,238,0.10)] dark:border-cyan-400/70 dark:bg-cyan-400/10 dark:text-cyan-300 dark:shadow-[0_0_18px_rgba(34,211,238,0.12)]'
+                    : 'border-zinc-200 bg-white text-zinc-600 hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700 dark:border-white/10 dark:bg-white/[0.025] dark:text-zinc-400 dark:hover:border-cyan-400/40 dark:hover:bg-cyan-400/[0.05] dark:hover:text-cyan-300'
                 }`}
               >
                 {category}
@@ -230,6 +230,7 @@ export default function SkillsSection() {
         </div>
 
         {/* Skill Cards */}
+
         <div className='skills-cards grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {filteredSkills.map((skill) => {
             const Icon = skill.icon
@@ -237,7 +238,7 @@ export default function SkillsSection() {
             return (
               <article
                 key={skill.name}
-                className='skill-card group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/60 p-5 transition-colors duration-300 hover:border-[var(--skill-color)] hover:bg-slate-800/70'
+                className='group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all duration-500 hover:border-cyan-300 hover:shadow-[0_8px_30px_rgba(34,211,238,0.10)] dark:border-white/10 dark:bg-white/[0.025] dark:shadow-none sm:p-6'
                 style={
                   {
                     '--skill-color': skill.color,
@@ -245,6 +246,12 @@ export default function SkillsSection() {
                   } as CSSProperties
                 }
               >
+                {/* Hover Gradient */}
+                <div
+                  aria-hidden='true'
+                  className='pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/[0.05] via-transparent to-emerald-400/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100'
+                />
+
                 {/* Hover Glow */}
                 <div
                   aria-hidden='true'
@@ -252,62 +259,88 @@ export default function SkillsSection() {
                   style={{ backgroundColor: skill.color }}
                 />
 
-                {/* Icon and Category */}
-                <div className='relative z-10 mb-5 flex items-center justify-between gap-3'>
-                  <div
-                    className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-slate-950/70 transition-transform duration-300 group-hover:scale-110'
-                    style={{ color: skill.color }}
-                  >
-                    <Icon size={25} aria-hidden='true' />
+                {/* Card Content */}
+                <div className='relative z-10'>
+                  {/* Icon and Category */}
+                  <div className='mb-5 flex items-center justify-between gap-3'>
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-300 group-hover:bg-cyan-50 dark:border-white/10 dark:bg-white/[0.04] dark:group-hover:border-cyan-400/30 dark:group-hover:bg-cyan-400/10 ${
+                        skill.color === '#FFFFFF'
+                          ? 'text-zinc-900 dark:text-white'
+                          : ''
+                      }`}
+                      style={
+                        skill.color === '#FFFFFF'
+                          ? undefined
+                          : { color: skill.color }
+                      }
+                    >
+                      <Icon size={25} aria-hidden='true' />
+                    </div>
+
+                    <span className='rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 transition-colors duration-300 group-hover:border-cyan-200 group-hover:bg-cyan-50 group-hover:text-cyan-700 dark:border-white/10 dark:bg-white/[0.03] dark:text-zinc-400 dark:group-hover:border-cyan-400/30 dark:group-hover:bg-cyan-400/10 dark:group-hover:text-cyan-400'>
+                      {skill.category}
+                    </span>
                   </div>
 
-                  <span className='rounded-full border border-slate-700/70 bg-slate-950/50 px-3 py-1 text-xs text-slate-400'>
-                    {skill.category}
-                  </span>
-                </div>
+                  {/* Skill Name */}
+                  <h3 className='mb-5 text-base font-semibold text-zinc-900 dark:text-white'>
+                    {skill.name}
+                  </h3>
 
-                {/* Skill Name */}
-                <h3 className='relative z-10 mb-5 text-base font-semibold text-slate-100'>
-                  {skill.name}
-                </h3>
+                  {/* Proficiency */}
 
-                {/* Proficiency */}
-                <div className='relative z-10 mb-2 flex items-center justify-between text-xs'>
-                  <span className='text-slate-400'>Proficiency</span>
+                  <div className='mb-2 flex items-center justify-between text-xs'>
+                    <span className='font-medium text-zinc-600 dark:text-zinc-400'>
+                      Proficiency
+                    </span>
 
-                  <span
-                    className='font-semibold'
-                    style={{ color: skill.color }}
-                  >
-                    {skill.level}%
-                  </span>
-                </div>
+                    <span
+                      className={`font-semibold ${
+                        skill.color === '#FFFFFF'
+                          ? 'text-zinc-900 dark:text-white'
+                          : ''
+                      }`}
+                      style={
+                        skill.color === '#FFFFFF'
+                          ? undefined
+                          : { color: skill.color }
+                      }
+                    >
+                      {skill.level}%
+                    </span>
+                  </div>
 
-                {/* Progress Bar */}
-                <div
-                  className='relative z-10 h-1.5 overflow-hidden rounded-full bg-slate-700/70'
-                  role='progressbar'
-                  aria-label={`${skill.name} proficiency`}
-                  aria-valuenow={skill.level}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                >
+                  {/* Progress Bar */}
+
                   <div
-                    className='h-full rounded-full'
-                    style={{
-                      width: `${skill.level}%`,
-                      backgroundColor: skill.color,
-                    }}
-                  />
+                    className='h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700/70'
+                    role='progressbar'
+                    aria-label={`${skill.name} proficiency`}
+                    aria-valuenow={skill.level}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                  >
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${
+                        skill.color === '#FFFFFF'
+                          ? 'bg-zinc-900 dark:bg-white'
+                          : ''
+                      }`}
+                      style={{
+                        width: `${skill.level}%`,
+                        ...(skill.color !== '#FFFFFF' && {
+                          backgroundColor: skill.color,
+                        }),
+                      }}
+                    />
+                  </div>
                 </div>
 
                 {/* Bottom Shine */}
                 <div
                   aria-hidden='true'
-                  className='pointer-events-none absolute inset-x-0 bottom-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-70'
-                  style={{
-                    background: `linear-gradient(90deg, transparent, ${skill.color}, transparent)`,
-                  }}
+                  className='pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-70'
                 />
               </article>
             )
