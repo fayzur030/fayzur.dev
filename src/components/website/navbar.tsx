@@ -219,19 +219,14 @@ export function Navbar() {
 
           {/* Right Actions */}
           <div className='flex shrink-0 items-center gap-1.5 sm:gap-3'>
-            {/* Desktop CV Button: hidden on mobile */}
+            {/* Desktop Let's Talk Button: hidden on mobile */}
             <a href='#contact'>
               <Button
-                id='projects'
                 variant={'outline'}
                 size={'lg'}
                 className={`text-muted-foreground  cursor-pointer hidden md:block`}
               >
                 <span className='relative z-10'>Let&apos;s Talk</span>
-                {/* <ArrowRight
-                  className='relative z-10 size-4 transition-transform duration-300 group-hover:translate-y-1'
-                  aria-hidden='true'
-                /> */}
               </Button>
             </a>
 
@@ -375,18 +370,13 @@ export function Navbar() {
           </ul>
 
           {/* Mobile Let's Talk Button */}
-          <a>
+          <a href='#contact' onClick={closeMenu} className='mt-4 block'>
             <Button
-              id='projects'
               variant={'outline'}
               size={'lg'}
               className={`text-muted-foreground  cursor-pointer w-full `}
             >
               <span className='relative z-10'>Let&apos;s Talk</span>
-              {/* <ArrowRight
-                  className='relative z-10 size-4 transition-transform duration-300 group-hover:translate-y-1'
-                  aria-hidden='true'
-                /> */}
             </Button>
           </a>
 
