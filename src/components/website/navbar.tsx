@@ -1,192 +1,471 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { ArrowDownToLine, Menu, X } from 'lucide-react'
 import { cn } from 'cn'
 import { navLinks, site } from '@/lib/portfolio'
 import { ThemeToggle } from '@/components/website/theme-toggle'
 import Link from 'next/link'
 
-const SECTIONS = navLinks.map((l) => l.href.slice(1))
+const SECTIONS = navLinks.map((link) => link.href.slice(1))
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [active, setActive] = useState<string>('')
+  const [active, setActive] = useState('')
 
-  // Compact state once content scrolls under the bar
+  // Navbar scroll effect
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 24)
+    }
+
+    handleScroll()
+
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
+    })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
-  // Active-section indication (highest ratio wins; no re-render storms)
+  // Active section detection
   useEffect(() => {
-    const headings = SECTIONS.map((id) => document.getElementById(id)).filter(
-      (el): el is HTMLElement => el !== null
+    const sections = SECTIONS.map((id) => document.getElementById(id)).filter(
+      (element): element is HTMLElement => element !== null
     )
-    if (headings.length === 0) return
+
+    if (sections.length === 0) return
+
     const observer = new IntersectionObserver(
       (entries) => {
-        let best: string | null = null
-        let bestRatio = 0
-        for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
-            bestRatio = entry.intersectionRatio
-            best = entry.target.id
-          }
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+
+        if (visibleSections[0]) {
+          setActive(visibleSections[0].target.id)
         }
-        if (best) setActive(best)
       },
-      { rootMargin: '-20% 0px -35% 0px', threshold: [0, 0.25, 0.5] }
+      {
+        rootMargin: '-20% 0px -55% 0px',
+        threshold: [0, 0.15, 0.3, 0.5, 0.75],
+      }
     )
-    headings.forEach((h) => observer.observe(h))
+
+    sections.forEach((section) => observer.observe(section))
+
     return () => observer.disconnect()
   }, [])
 
-  // Lock scroll while the mobile panel is open
+  // Lock body scroll while mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return
+
+    const previousOverflow = document.body.style.overflow
+
+    document.body.style.overflow = 'hidden'
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleEscape)
+
     return () => {
-      document.body.style.overflow = ''
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleEscape)
     }
   }, [open])
 
-  const onNavClick = () => setOpen(false)
+  const closeMenu = () => setOpen(false)
 
-  const linkClass = (href: string, extra?: boolean) =>
-    cn(
-      'relative rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground',
-      extra &&
-        "text-foreground after:absolute after:inset-x-3 after:-bottom-0.5 after:h-px after:bg-primary/70 after:content-['']"
+  const getLinkClass = (href: string) => {
+    const isActive = active === href.slice(1)
+
+    return cn(
+      'group relative inline-flex items-center rounded-lg',
+      'px-2.5 py-2 xl:px-3',
+      'text-[13px] font-medium tracking-wide',
+      'transition-colors duration-300',
+      isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
     )
+  }
 
   return (
-    <header
-      className={cn(
-        'navbar-glass fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300',
-        scrolled
-          ? 'border-border/70 shadow-[0_1px_24px_rgb(0_0_0/0.18)]'
-          : 'border-transparent'
-      )}
-    >
-      {/* Screen-reader friendly: skip to content */}
-      <a
-        href='#main'
-        className='sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-sm'
+    <>
+      {/* Navbar */}
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-50',
+          'border-b transition-all duration-300',
+          scrolled
+            ? [
+                'border-border/70',
+                'bg-background/90 backdrop-blur-2xl',
+                'shadow-[0_8px_30px_rgba(0,0,0,0.08)]',
+              ]
+            : 'border-transparent bg-background/60 backdrop-blur-lg'
+        )}
       >
-        Skip to content
-      </a>
+        {/* Skip to content */}
+        <a
+          href='#main'
+          className={cn(
+            'sr-only focus:not-sr-only',
+            'focus:absolute focus:left-4 focus:top-4 focus:z-[100]',
+            'focus:rounded-lg focus:bg-background',
+            'focus:px-4 focus:py-2 focus:text-sm',
+            'focus:text-foreground focus:ring-2 focus:ring-primary'
+          )}
+        >
+          Skip to content
+        </a>
 
-      <nav
-        className='mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6'
-        aria-label='Primary'
-      >
-        {/* Logo */}
-        <Link href='#hero' className='group flex items-center gap-2.5'>
-          <span className='flex size-8 items-center justify-center rounded-lg border border-ring/30 bg-primary/10 font-mono text-[0.7rem] font-bold text-primary transition-shadow duration-300 group-hover:shadow-[0_0_14px_rgb(194_248_0/0.25)]'>
-            FR
-          </span>
-          <span className='hidden font-heading text-sm lg:text-xl font-semibold tracking-wide sm:block'>
-            {site.name}
-          </span>
-        </Link>
-
-        {/* Desktop links */}
-        <ul className='hidden items-center gap-1 md:flex'>
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className={linkClass(link.href, active === link.href.slice(1))}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className='flex items-center gap-2'>
-          <ThemeToggle />
-          {/* Mobile trigger */}
-          <button
-            type='button'
-            onClick={() => setOpen(true)}
-            aria-expanded={open}
-            aria-controls='mobile-nav'
-            aria-label='Open navigation menu'
-            className='inline-flex size-9 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:border-ring/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 md:hidden'
+        <nav
+          className={cn(
+            'mx-auto flex w-full max-w-7xl items-center justify-between',
+            'gap-2 px-3 sm:gap-4 sm:px-6 lg:px-8',
+            'h-16 sm:h-[72px]'
+          )}
+          aria-label='Primary navigation'
+        >
+          {/* Logo */}
+          <Link
+            href='#hero'
+            onClick={closeMenu}
+            className='group flex min-w-0 shrink items-center gap-2 sm:gap-3'
+            aria-label={`${site.name} home`}
           >
-            <Menu className='size-4' aria-hidden='true' />
-          </button>
-        </div>
-      </nav>
+            <span
+              className={cn(
+                'relative flex size-9 shrink-0 items-center justify-center',
+                'overflow-hidden rounded-xl',
+                'border border-primary/30 bg-primary/10',
+                'font-mono text-sm font-bold tracking-tight text-primary',
+                'transition-all duration-300',
+                'group-hover:border-primary/60',
+                'group-hover:bg-primary/15',
+                'group-hover:shadow-[0_0_24px_rgba(194,248,0,0.15)]',
+                'sm:size-10'
+              )}
+            >
+              <span className='relative z-10'>FR</span>
 
-      {/* Mobile slide-over panel (sheet-style) */}
+              <span
+                aria-hidden='true'
+                className={cn(
+                  'absolute inset-0 -translate-x-full',
+                  'bg-gradient-to-r from-transparent via-primary/15 to-transparent',
+                  'transition-transform duration-700',
+                  'group-hover:translate-x-full'
+                )}
+              />
+            </span>
+
+            <span className='hidden min-w-0 sm:flex sm:flex-col'>
+              <span className='truncate font-heading text-sm font-bold tracking-tight text-foreground sm:text-base'>
+                {site.name}
+              </span>
+
+              <span className='mt-0.5 whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground sm:text-[10px]'>
+                Full-Stack Developer
+              </span>
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <ul className='hidden items-center gap-0.5 lg:flex xl:gap-1'>
+            {navLinks.map((link) => {
+              const isActive = active === link.href.slice(1)
+
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    aria-current={isActive ? 'location' : undefined}
+                    className={getLinkClass(link.href)}
+                  >
+                    <span>{link.label}</span>
+
+                    <span
+                      aria-hidden='true'
+                      className={cn(
+                        'absolute inset-x-3 -bottom-0.5 h-[2px]',
+                        'origin-center rounded-full bg-primary',
+                        'transition-transform duration-300',
+                        isActive
+                          ? 'scale-x-100'
+                          : 'scale-x-0 group-hover:scale-x-100'
+                      )}
+                    />
+
+                    {isActive && (
+                      <span
+                        aria-hidden='true'
+                        className='absolute inset-x-3 -bottom-0.5 h-[2px] rounded-full bg-primary blur-[5px]'
+                      />
+                    )}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+
+          {/* Right Actions */}
+          <div className='flex shrink-0 items-center gap-1.5 sm:gap-3'>
+            {/* Desktop CV Button: hidden on mobile */}
+            <a
+              href='/Fayzur-Rahman-CV.pdf'
+              download
+              aria-label='Download CV'
+              className={cn(
+                'group relative hidden h-10 shrink-0 items-center justify-center gap-2',
+                'overflow-hidden rounded-xl',
+                'border border-primary/40 bg-primary',
+                'px-4 text-sm font-bold dark:text-[#0B1020] text-[#ffffff]',
+                'transition-all duration-300',
+                'hover:-translate-y-0.5 hover:border-primary',
+                'hover:shadow-[0_0_24px_rgba(194,248,0,0.2)]',
+                'active:translate-y-0',
+                'lg:inline-flex'
+              )}
+            >
+              <span
+                aria-hidden='true'
+                className={cn(
+                  'absolute inset-0 -translate-x-full',
+                  'bg-gradient-to-r from-transparent via-white/20 to-transparent',
+                  'transition-transform duration-500',
+                  'group-hover:translate-x-full'
+                )}
+              />
+
+              <span className='relative whitespace-nowrap'>Download CV</span>
+
+              <ArrowDownToLine
+                className='relative size-4 shrink-0 transition-transform duration-300 group-hover:translate-y-0.5'
+                aria-hidden='true'
+              />
+            </a>
+
+            {/* Theme Toggle */}
+            <div
+              className={cn(
+                'flex size-9 shrink-0 items-center justify-center',
+                'rounded-lg border border-border/70 bg-background/60',
+                'transition-colors hover:border-primary/30',
+                'sm:size-10 sm:rounded-xl'
+              )}
+            >
+              <ThemeToggle />
+            </div>
+
+            {/* Hamburger Button */}
+            <button
+              type='button'
+              onClick={() => setOpen(true)}
+              aria-expanded={open}
+              aria-controls='mobile-nav'
+              aria-label='Open navigation menu'
+              className={cn(
+                'inline-flex size-9 shrink-0 items-center justify-center',
+                'rounded-lg border border-border/70 bg-background/60',
+                'text-foreground transition-colors',
+                'hover:border-primary/40 hover:bg-primary/5',
+                'focus-visible:outline-none focus-visible:ring-2',
+                'focus-visible:ring-primary/60',
+                'sm:size-10 sm:rounded-xl',
+                'lg:hidden'
+              )}
+            >
+              <Menu className='size-4 sm:size-5' aria-hidden='true' />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile Navigation Drawer */}
       <div
         id='mobile-nav'
         className={cn(
-          'fixed inset-0 z-[55] md:hidden',
-          open ? 'pointer-events-auto' : 'pointer-events-none invisible'
+          'fixed inset-0 z-[60] lg:hidden',
+          open ? 'pointer-events-auto visible' : 'pointer-events-none invisible'
         )}
         aria-hidden={!open}
       >
-        <div
+        {/* Backdrop */}
+        <button
+          type='button'
+          tabIndex={open ? 0 : -1}
+          aria-label='Close navigation menu'
+          onClick={closeMenu}
           className={cn(
-            'absolute inset-0 bg-black/55 backdrop-blur-sm transition-opacity duration-300',
+            'absolute inset-0 cursor-default bg-black/60',
+            'backdrop-blur-sm transition-opacity duration-300',
             open ? 'opacity-100' : 'opacity-0'
           )}
-          onClick={onNavClick}
         />
-        <div
+
+        {/* Drawer */}
+        <aside
           className={cn(
-            'sheet-panel absolute inset-y-0 right-0 flex w-72 max-w-[85vw] flex-col border-l border-border p-6 pt-5 shadow-2xl transition-transform duration-300 ease-out',
+            'absolute inset-y-0 right-0 flex',
+            'w-[min(320px,88vw)] flex-col',
+            'border-l border-border/70 bg-background/95',
+            'p-4 pt-5 shadow-2xl backdrop-blur-2xl',
+            'transition-transform duration-300 ease-out',
+            'sm:p-6 sm:pt-6',
             open ? 'translate-x-0' : 'translate-x-full'
           )}
           role='dialog'
           aria-modal={open}
-          aria-label='Site navigation'
+          aria-label='Mobile navigation'
         >
-          <div className='mb-6 flex items-center justify-between'>
-            <span className='font-mono text-xs uppercase tracking-widest text-muted-foreground'>
-              menu
-            </span>
+          {/* Drawer Header */}
+          <div className='mb-7 flex items-center justify-between sm:mb-8'>
+            <div className='flex min-w-0 items-center gap-3'>
+              <span className='flex size-9 shrink-0 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 font-mono text-xs font-bold text-primary'>
+                FR
+              </span>
+
+              <div className='min-w-0'>
+                <p className='font-heading text-sm font-bold text-foreground'>
+                  Fayzur Rahman
+                </p>
+
+                <p className='mt-0.5 text-[10px] text-muted-foreground'>
+                  Full-Stack Developer
+                </p>
+              </div>
+            </div>
+
             <button
               type='button'
-              onClick={onNavClick}
+              onClick={closeMenu}
               aria-label='Close navigation menu'
-              className='inline-flex size-9 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60'
+              className={cn(
+                'inline-flex size-9 shrink-0 items-center justify-center',
+                'rounded-xl border border-border/70',
+                'text-muted-foreground transition-colors',
+                'hover:border-primary/40 hover:text-foreground',
+                'focus-visible:outline-none focus-visible:ring-2',
+                'focus-visible:ring-primary/60'
+              )}
             >
               <X className='size-4' aria-hidden='true' />
             </button>
           </div>
-          <ul className='flex flex-col gap-1'>
-            {navLinks.map((link, i) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={onNavClick}
-                  className={cn(
-                    'flex items-baseline gap-3 rounded-lg px-3 py-3 font-heading text-lg font-semibold transition-colors hover:bg-accent/60 hover:text-foreground',
-                    active === link.href.slice(1) && 'text-primary'
-                  )}
-                >
-                  <span className='font-mono text-[0.65rem] text-muted-foreground/70'>
-                    0{i + 1}
-                  </span>
-                  {link.label}
-                </a>
-              </li>
-            ))}
+
+          {/* Mobile Navigation Links */}
+          <ul className='flex flex-col gap-1.5'>
+            {navLinks.map((link, index) => {
+              const isActive = active === link.href.slice(1)
+
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={closeMenu}
+                    aria-current={isActive ? 'location' : undefined}
+                    className={cn(
+                      'group flex items-center gap-3 rounded-xl',
+                      'border px-3 py-3',
+                      'transition-all duration-200 sm:gap-4 sm:px-4 sm:py-3.5',
+                      isActive
+                        ? 'border-primary/25 bg-primary/10 text-primary'
+                        : 'border-transparent text-muted-foreground hover:border-border/70 hover:bg-accent/50 hover:text-foreground'
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        'font-mono text-[11px]',
+                        isActive ? 'text-primary' : 'text-muted-foreground/60'
+                      )}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <span className='min-w-0 flex-1 truncate font-heading text-base font-semibold'>
+                      {link.label}
+                    </span>
+
+                    <span
+                      aria-hidden='true'
+                      className={cn(
+                        'size-1.5 shrink-0 rounded-full bg-primary',
+                        'transition-all duration-300',
+                        isActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                      )}
+                    />
+                  </a>
+                </li>
+              )
+            })}
           </ul>
-          <div className='mt-auto border-t border-border pt-4 font-mono text-[0.65rem] text-muted-foreground/70'>
-            {site.name.toLowerCase().replace(/[^a-z]/g, '')}
-            <span className='text-primary'>.dev</span>
+
+          {/* Mobile Download CV Button */}
+          <a
+            href='/Fayzur-Rahman-CV.pdf'
+            download
+            onClick={closeMenu}
+            className={cn(
+              'group relative mt-6 inline-flex h-12 shrink-0 items-center justify-center gap-2.5',
+              'overflow-hidden rounded-xl',
+              'border border-primary/40 bg-primary',
+              'text-sm font-bold text-[#0B1020]',
+              'transition-all duration-300',
+              'hover:border-primary',
+              'hover:shadow-[0_0_24px_rgba(194,248,0,0.2)]',
+              'active:scale-[0.98]'
+            )}
+          >
+            <span
+              aria-hidden='true'
+              className={cn(
+                'absolute inset-0 -translate-x-full',
+                'bg-gradient-to-r from-transparent via-white/25 to-transparent',
+                'transition-transform duration-500',
+                'group-hover:translate-x-full'
+              )}
+            />
+
+            <ArrowDownToLine
+              className='relative size-4 shrink-0 transition-transform duration-300 group-hover:translate-y-0.5'
+              aria-hidden='true'
+            />
+
+            <span className='relative'>Download My CV</span>
+          </a>
+
+          {/* Drawer Footer */}
+          <div className='mt-auto border-t border-border/70 pt-5'>
+            <p className='font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground'>
+              Building for the web
+            </p>
+
+            <p className='mt-2 truncate font-heading text-sm font-semibold text-foreground'>
+              {site.name}
+              <span className='text-primary'>.dev</span>
+            </p>
+
+            <div className='mt-3 flex items-center gap-2'>
+              <span className='relative flex size-2 shrink-0'>
+                <span className='absolute inline-flex size-full animate-ping rounded-full bg-primary/60' />
+                <span className='relative inline-flex size-2 rounded-full bg-primary' />
+              </span>
+
+              <span className='text-xs text-muted-foreground'>
+                Always learning, always building
+              </span>
+            </div>
           </div>
-        </div>
+        </aside>
       </div>
-    </header>
+    </>
   )
 }

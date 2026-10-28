@@ -5,39 +5,32 @@ import { SectionHeading } from '@/components/website/section-heading'
 import { buttonVariants } from '@/components/ui/button'
 import { projects } from '@/lib/projects'
 import { cn } from '@/lib/utils'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-}
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    x: 80,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
-    },
-  },
-}
-
 export function Projects() {
+  const shouldReduceMotion = useReducedMotion()
+
+  const fadeUp = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 24,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.6,
+        ease: 'easeOut' as const,
+      },
+    },
+  }
+
   return (
     <section
       id='projects'
-      className='relative z-10 px-4 py-24 sm:px-6 max-w-7xl mx-auto'
+      className='relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6'
     >
       <div className='mx-auto max-w-7xl'>
         <SectionHeading
@@ -46,17 +39,20 @@ export function Projects() {
           description="Selected projects I've built. Click 'View Details' to learn more about each one."
         />
 
-        <motion.div
-          className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'
-          variants={containerVariants}
-          initial='hidden'
-          whileInView='visible'
-          viewport={{ once: true, amount: 0.2, margin: '-40px' }}
-        >
-          {projects.map((project) => (
+        <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+          {projects.map((project, index) => (
             <motion.article
               key={project.slug}
-              variants={cardVariants}
+              variants={fadeUp}
+              initial='hidden'
+              whileInView='visible'
+              viewport={{
+                once: false,
+                amount: 0.15,
+              }}
+              transition={{
+                delay: shouldReduceMotion ? 0 : index * 0.25,
+              }}
               className='group relative flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:shadow-[0_20px_60px_-20px_rgba(34,211,238,0.15)]'
             >
               {/* Project Image */}
@@ -90,6 +86,7 @@ export function Projects() {
                 )}
               </div>
 
+              {/* Project Content */}
               <div className='flex flex-1 flex-col p-6'>
                 <div className='mb-3'>
                   <h3 className='font-heading text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-cyan-300'>
@@ -140,7 +137,7 @@ export function Projects() {
               </div>
             </motion.article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

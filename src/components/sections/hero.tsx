@@ -74,7 +74,11 @@ export function Hero() {
               //   'group relative h-11 gap-2 overflow-hidden rounded-xl border border-cyan-400/30 bg-gradient-to-r from-cyan-500 to-blue-600 px-5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/60 hover:from-cyan-400 hover:to-blue-500 hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] active:translate-y-0'
               // )}
             >
-              <Button variant={'default'} size={'lg'}>
+              <Button
+                variant={'default'}
+                size={'lg'}
+                className={`dark:text-[#0B1020] text-[#ffffff]`}
+              >
                 <span className='relative z-10'>Download CV</span>
                 <ArrowDownToLine
                   className='relative z-10 size-4 transition-transform duration-300 group-hover:translate-y-1'
