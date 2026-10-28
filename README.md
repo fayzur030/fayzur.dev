@@ -1,37 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👨‍💻 Md. Fayzur Rahman — Developer Portfolio
 
-## Getting Started
+### Full-Stack Web Developer | React | Next.js | TypeScript | Node.js
 
-First, run the development server:
+Welcome to my developer portfolio! 🚀
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+I'm a passionate web developer who enjoys building modern, responsive, and user-friendly web applications. I focus on writing clean code, creating intuitive user experiences, and developing practical solutions to real-world problems.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This portfolio showcases my development journey, technical skills, featured projects, and experience with modern web technologies.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Live Portfolio
 
-## Learn More
+🔗 **Portfolio:** [Visit My Portfolio] (https://fayzurdev.vercel.app/)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🎨 Modern and premium UI design
+- 🌗 Dark and light theme support
+- 📱 Fully responsive layout
+- ⚡ Smooth animations and interactive elements
+- 👨‍💻 About Me section
+- 🛠️ Technical skills and technologies
+- 🚀 Featured projects with detailed information
+- 📄 Resume/CV access
+- 📬 Contact and social media links
+- ♿ Accessible and user-friendly interface
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Technologies & Tools
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# fayzur.dev
+### Frontend
+
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+
+<!--
+### Backend & Database
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white) -->
+
+### Tools & Platforms
+
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+---
+
+## 🚀 Featured Projects
+
+### 1. BazarDor
+
+**Know Your Market, Make Smarter Choices.**
+
+A Bengali marketplace information platform designed to help users explore market information through an accessible and responsive interface.
+
+- **Technologies:** Next.js, TypeScript, Tailwind CSS, HeroUI, Better Auth, MongoDB
+- **Live Demo:** [View Project](https://bazar-dor-sigma.vercel.app)
+- **Source Code:** [GitHub Repository](https://github.com/fayzur030/bazar-dor)
+
+### 2. Fit Log
+
+**Track Your Fitness. Build Better Habits.**
+
+A fitness-focused web application designed to provide an organized and user-friendly experience for managing fitness activities.
+
+- **Technologies:** React, TypeScript, Tailwind CSS
+- **Live Demo:** [View Project](https://fit-log-mu.vercel.app)
+- **Source Code:** [GitHub Repository](https://github.com/fayzur030/fit-log)
+
+### 3. Bangla Sangbad
+
+**বাংলা সংবাদ — আপনার বিশ্বস্ত সংবাদমাধ্যম**
+
+A Bengali news platform that helps readers discover and explore news articles through category-based navigation and a responsive reading experience.
+
+- **Technologies:** Next.js, React, TypeScript, Tailwind CSS, Express.js, MongoDB, Better Auth
+- **Live Demo:** [View Project](https://bangla-sangbad.vercel.app)
+- **Source Code:** [GitHub Repository](https://github.com/fayzur030/bangla-sangbad)
+
+### 4. DevStack Builder
+
+A web development project built as part of my journey toward creating practical applications with modern web technologies.
+
+- **Live Demo:** [View Project](https://dev-stack-builder-henna.vercel.app)
+- **Source Code:** [GitHub Repository](https://github.com/fayzur030/dev-stack-builder)
+
+---
+
+## 🎯 My Development Goals
+
+- Build scalable and maintainable web applications
+- Improve my full-stack development skills
+- Write clean, reusable, and readable code
+- Develop accessible and responsive user interfaces
+- Strengthen my backend and database knowledge
+- Learn modern development practices through real-world projects
+
+---
+
+## 📬 Connect With Me
+
+I'm always interested in connecting with developers, collaborating on projects, and exploring new opportunities.
+
+- **GitHub:** [@fayzur030](https://github.com/fayzur030)
+- **LinkedIn:** [Md. Fayzur Rahman](https://www.linkedin.com/in/md-fayzur-rahman/)
+- **Email:** [mdfayzurrahman030@gmail.com](mailto:mdfayzurrahman030@gmail.com)
+
+---
+
+## 📄 License
+
+This project is intended to showcase my personal portfolio and development work.
+
+---
+
+<p align="center">
+  Designed and developed with ❤️ by <strong>Md. Fayzur Rahman</strong>
+</p>
+
+<p align="center">
+  <i>Curious mind. Clean code. Continuous growth.</i>
+</p>
