@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import type { IconType } from 'react-icons'
+import { createElement } from 'react'
 import {
   SiReact,
   SiNextdotjs,
@@ -103,26 +104,24 @@ const technologyIcons: Record<string, IconType> = {
   graphql: SiGraphql,
 }
 
-function getTechnologyIcon(tech: string) {
+function getTechnologyIcon(tech: string): IconType {
   const normalizedTech = tech.trim().toLowerCase()
   return technologyIcons[normalizedTech] ?? Code2
 }
 
-import type { IconType } from 'react-icons'
-
-// Keep your existing getTechnologyIcon() and icon mappings.
-
 function TechnologyBadge({ tech }: { tech: string }) {
-  const TechIcon: IconType = getTechnologyIcon(tech)
+  const icon = getTechnologyIcon(tech)
 
   return (
     <span className='inline-flex items-center gap-2 rounded-md border border-border/50 bg-background/40 px-3 py-1.5 font-mono text-xs text-foreground/80 transition-colors duration-200 hover:border-cyan-400/40 hover:text-cyan-300'>
-      <TechIcon className='size-4 shrink-0 text-cyan-400' aria-hidden='true' />
+      {createElement(icon, {
+        className: 'size-4 shrink-0 text-cyan-400',
+        'aria-hidden': true,
+      })}
       <span>{tech}</span>
     </span>
   )
 }
-
 export function ProjectDetailsPage({ project }: ProjectDetailsPageProps) {
   return (
     <div className='mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8'>

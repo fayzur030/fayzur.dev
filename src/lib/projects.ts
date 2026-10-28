@@ -102,22 +102,22 @@ export const projects: Project[] = [
   //   image: '/images/projects/bazar-inventory.jpg',
   //   initials: 'BI',
   // },
-  {
-    slug: 'wanderly-travel',
-    title: 'Wanderly Travel',
-    description:
-      'A full-stack travel platform where users can explore destinations, discover travel experiences, and manage their bookings.',
-    tech: [
-      'Next.js',
-      'TypeScript',
-      'Tailwind CSS',
-      'Express.js',
-      'MongoDB',
-      'Better Auth',
-    ],
-    image: '/images/projects/wanderly-travel.jpg',
-    initials: 'WT',
-  },
+  // {
+  //   slug: 'wanderly-travel',
+  //   title: 'Wanderly Travel',
+  //   description:
+  //     'A full-stack travel platform where users can explore destinations, discover travel experiences, and manage their bookings.',
+  //   tech: [
+  //     'Next.js',
+  //     'TypeScript',
+  //     'Tailwind CSS',
+  //     'Express.js',
+  //     'MongoDB',
+  //     'Better Auth',
+  //   ],
+  //   image: '/images/projects/wanderly-travel.jpg',
+  //   initials: 'WT',
+  // },
 ]
 
 export const projectDetails: Record<string, ProjectDetails> = {
