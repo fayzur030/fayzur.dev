@@ -1,4 +1,6 @@
-import image from '@/assets/bangla_sonbad.png'
+import banglaSanbad from '@/assets/bangla_sonbad.png'
+import bazarDor from '@/assets/bazar_dor.png'
+import { StaticImageData } from 'next/image'
 
 export type ProjectDetails = {
   slug: string
@@ -13,9 +15,10 @@ export type ProjectDetails = {
     frontend?: string[]
     backend?: string[]
     database?: string[]
+    authentication?: string[]
     tools?: string[]
   }
-  image: string
+  image: string | StaticImageData
   liveUrl: string
   githubUrl: string
   challenges: string[]
@@ -27,178 +30,318 @@ export type Project = {
   title: string
   description: string
   tech: string[]
-  image: string
+  image: string | StaticImageData
   initials?: string
 }
 
 export const projects: Project[] = [
   {
-    slug: 'bazar-inventory',
-    title: 'Bazar & Inventory Management',
+    slug: 'bangla-sangbad',
+    title: 'Bangla Sangbad',
     description:
-      'A full-stack inventory management application for managing products, stock levels, and pricing.',
+      'A Bengali news platform for exploring news articles, browsing categories, discovering trending stories, and enjoying a responsive reading experience.',
     tech: [
       'Next.js',
       'TypeScript',
       'Tailwind CSS',
-      'Node.js',
       'Express.js',
       'MongoDB',
+      'Better Auth',
     ],
-    image: '/images/projects/bazar-inventory.jpg',
-    initials: 'BI',
+    image: banglaSanbad,
+    initials: 'BS',
   },
+
+  {
+    slug: 'bazar-dor',
+    title: 'BazarDor',
+    description:
+      'A Bengali marketplace platform designed to help users explore products, discover market prices, and make informed purchasing decisions through a clean, accessible, and responsive interface.',
+    tech: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'HeroUI',
+      'Better Auth',
+      'MongoDB',
+    ],
+    image: bazarDor,
+    initials: 'BD',
+  },
+
+  // {
+  //   slug: 'bazar-inventory',
+  //   title: 'Bazar & Inventory Management',
+  //   description:
+  //     'A full-stack inventory management application for managing products, tracking stock levels, monitoring prices, and organizing inventory operations.',
+  //   tech: [
+  //     'Next.js',
+  //     'TypeScript',
+  //     'Tailwind CSS',
+  //     'Better Auth',
+  //     'MongoDB',
+  //     'Express.js',
+  //   ],
+  //   image: '/images/projects/bazar-inventory.jpg',
+  //   initials: 'BI',
+  // },
   {
     slug: 'wanderly-travel',
     title: 'Wanderly Travel',
     description:
-      'A travel booking platform for exploring destinations and managing travel bookings.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Express.js', 'MongoDB'],
+      'A full-stack travel platform where users can explore destinations, discover travel experiences, and manage their bookings.',
+    tech: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Express.js',
+      'MongoDB',
+      'Better Auth',
+    ],
     image: '/images/projects/wanderly-travel.jpg',
     initials: 'WT',
-  },
-  {
-    slug: 'bangla-sangbad',
-    title: 'Bangla Sangbad',
-    description:
-      'A modern Bengali news platform for browsing news articles and discovering trending stories.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
-    image: image,
-    initials: 'BS',
   },
 ]
 
 export const projectDetails: Record<string, ProjectDetails> = {
-  'bazar-inventory': {
-    slug: 'bazar-inventory',
-    title: 'Bazar & Inventory Management',
-    tagline: 'Streamlined inventory control for retail businesses',
+  // =========================================================
+  // BAZAR & INVENTORY MANAGEMENT
+  // =========================================================
+  // 'bazar-inventory': {
+  //   slug: 'bazar-inventory',
+  //   title: 'Bazar & Inventory Management',
+  //   tagline: 'Smarter Inventory. Better Business Decisions.',
+  //   description:
+  //     'A full-stack inventory management application designed to help businesses organize products, monitor stock levels, manage pricing, and track inventory operations through a centralized dashboard.',
+
+  //   overview: {
+  //     problem:
+  //       'Managing inventory manually can lead to inaccurate stock records, unexpected shortages, pricing inconsistencies, and inefficient product management. This application provides a centralized solution for organizing inventory and monitoring stock information.',
+
+  //     features: [
+  //       'Create, update, and manage product information',
+  //       'Organize products by category',
+  //       'Track available stock quantities and product units',
+  //       'Monitor product prices and cost prices',
+  //       'Identify low-stock products using configurable thresholds',
+  //       'Manage product status and SKU information',
+  //       'Search, filter, and paginate product records',
+  //       'Access inventory information through a centralized dashboard',
+  //     ],
+  //   },
+
+  //   techStack: {
+  //     frontend: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui'],
+
+  //     backend: ['Node.js', 'Express.js', 'REST API'],
+
+  //     database: ['MongoDB'],
+
+  //     authentication: ['Better Auth'],
+
+  //     tools: ['Lucide React', 'Sonner', 'Vercel', 'Render', 'Git', 'GitHub'],
+  //   },
+
+  //   image: '/images/projects/bazar-inventory.jpg',
+
+  //   liveUrl: 'https://bazar-inventory.onrender.com',
+  //   githubUrl: 'https://github.com/fayzur030/bazar-inventory',
+
+  //   challenges: [
+  //     'Designing a flexible product data structure for inventory management',
+  //     'Keeping product information consistent between the frontend and backend',
+  //     'Implementing product search, filtering, and pagination',
+  //     'Managing stock quantities and low-stock thresholds',
+  //     'Building a responsive dashboard for efficient inventory management',
+  //   ],
+
+  //   futureImprovements: [
+  //     'Purchase order and supplier management',
+  //     'Sales tracking and transaction history',
+  //     'Inventory reports and analytics dashboards',
+  //     'Barcode scanning for faster product management',
+  //     'Role-based access control for multiple staff members',
+  //     'Stock movement history and inventory audit logs',
+  //   ],
+  // },
+
+  //Bazar-dor
+
+  'bazar-dor': {
+    slug: 'bazar-dor',
+    title: 'BazarDor',
+    tagline: 'Know Your Market, Make Smarter Choices.',
     description:
-      'A comprehensive full-stack solution designed to help businesses efficiently manage their inventory, track product stock levels, monitor pricing, and streamline purchasing operations. Built with scalability and ease of use in mind.',
+      'A Bengali marketplace information platform designed to help people explore market prices and make informed purchasing decisions. Built with a responsive interface and Bengali-first user experience, BazarDor makes market information easier to access.',
+
     overview: {
       problem:
-        'Small to medium-sized retailers often struggle with manual inventory tracking, leading to stockouts, overstocking, and pricing inconsistencies. Traditional methods are time-consuming and prone to errors.',
+        'Consumers often struggle to find accessible and organized market price information before shopping. BazarDor aims to make market information easier to explore through a user-friendly platform designed for Bengali-speaking users.',
+
       features: [
-        'Product catalog management with categories and variants',
-        'Real-time stock level tracking and low-stock alerts',
-        'Dynamic pricing management with discount support',
-        'Purchase order and supplier management',
-        'Sales tracking and transaction history',
-        'Comprehensive reporting and analytics dashboard',
-        'User role management with access controls',
+        'Explore market price information through an organized interface',
+        'Browse products and their available market information',
+        'Navigate Bengali content with a localized user experience',
+        'Access market information through a responsive interface',
+        'Use authentication features powered by Better Auth',
+        'Receive contextual feedback through toast notifications',
+        'Explore market information on desktop, tablet, and mobile devices',
       ],
     },
+
     techStack: {
-      frontend: [
-        'Next.js 15',
-        'TypeScript',
-        'Tailwind CSS',
-        'React Hook Form',
-        'shadcn/ui',
-      ],
-      backend: ['Node.js', 'Express.js', 'REST API'],
-      database: ['MongoDB', 'Mongoose ODM'],
-      tools: ['JWT Authentication', 'Vercel', 'Cloudinary'],
+      frontend: ['Next.js', 'TypeScript', 'Tailwind CSS', 'HeroUI'],
+
+      backend: ['Next.js API Routes'],
+
+      database: ['MongoDB'],
+
+      authentication: ['Better Auth'],
+
+      tools: ['Lucide React', 'Vercel', 'Git', 'GitHub'],
     },
-    image: '/images/projects/bazar-inventory.jpg',
-    liveUrl: 'https://bazar-inventory-demo.vercel.app',
-    githubUrl: 'https://github.com/fayzur/bazar-inventory-client',
+
+    image: bazarDor,
+
+    liveUrl: 'https://bazar-dor-sigma.vercel.app',
+    githubUrl: 'https://github.com/fayzur030/bazar-dor',
+
     challenges: [
-      'Implementing real-time inventory synchronization across multiple transactions',
-      'Designing a flexible schema for products with varying attributes',
-      'Building efficient reporting queries for large datasets',
-      'Ensuring data consistency during concurrent stock updates',
+      'Designing a Bengali-first interface with readable typography',
+      'Creating a consistent visual experience for market information',
+      'Building a responsive layout for different screen sizes',
+      'Organizing product and market information for easy discovery',
     ],
+
     futureImprovements: [
-      'Integration with barcode scanning for faster operations',
-      'Multi-store/location support for franchise businesses',
-      'Advanced analytics with predictive stock forecasting',
-      'Mobile app companion for on-the-go management',
-      'Integration with accounting software like QuickBooks',
+      'Historical market price tracking and comparison',
+      'Price trend visualization through interactive charts',
+      'Location-based market price discovery',
+      'Price change notifications for selected products',
+      'Advanced product search and category filtering',
+      'Community-driven market price submissions',
     ],
   },
+
+  // =========================================================
+  // WANDERLY TRAVEL
+  // =========================================================
   'wanderly-travel': {
     slug: 'wanderly-travel',
     title: 'Wanderly Travel',
-    tagline: 'Discover and book your perfect adventure',
+    tagline: 'Discover Destinations. Plan Your Next Adventure.',
     description:
-      'A modern travel booking platform that connects travelers with amazing destinations. Users can explore curated travel packages, make bookings, manage itineraries, and share their experiences all in one seamless platform.',
+      'A full-stack travel booking platform that allows users to explore travel destinations, discover experiences, and manage their bookings through a responsive interface.',
+
     overview: {
       problem:
-        'Travel planning is fragmented across multiple platforms - finding destinations, comparing prices, and managing bookings can be overwhelming and time-consuming.',
+        'Travelers need a convenient way to discover destinations, review travel options, and keep track of their reservations. Managing destination information and bookings across disconnected platforms can make the planning process unnecessarily complicated.',
+
       features: [
-        'Destination discovery with rich media galleries',
-        'Interactive travel package browsing and filtering',
-        'Secure booking and payment integration',
-        'Personalized user dashboard and booking history',
-        'Review and rating system for destinations',
-        'Wishlist functionality for future trips',
-        'Responsive design for mobile travelers',
+        'Explore available travel destinations',
+        'View destination details and travel information',
+        'Browse travel experiences by destination category',
+        'Register and log in to access user features',
+        'Create travel bookings for selected destinations',
+        'View personal booking history',
+        'Manage destination and booking data through API integration',
+        'Use a responsive interface across desktop, tablet, and mobile devices',
       ],
     },
+
     techStack: {
-      frontend: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-      backend: ['Node.js', 'Express.js', 'RESTful API'],
-      database: ['MongoDB', 'Mongoose'],
-      tools: ['Stripe Payment', 'Cloudinary', 'NextAuth.js'],
+      frontend: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+
+      backend: ['Node.js', 'Express.js', 'REST API'],
+
+      database: ['MongoDB'],
+
+      authentication: ['Better Auth'],
+
+      tools: ['Vercel', 'Render', 'Git', 'GitHub'],
     },
+
     image: '/images/projects/wanderly-travel.jpg',
-    liveUrl: 'https://wanderly-travel-demo.vercel.app',
-    githubUrl: 'https://github.com/fayzur/wanderly-travel-client',
+
+    liveUrl: 'https://wanderly-travel.vercel.app',
+    githubUrl: 'https://github.com/fayzur030/wanderly-travel',
+
     challenges: [
-      'Building a complex filtering system for destinations and packages',
-      'Implementing secure payment processing with multiple scenarios',
-      'Optimizing image loading for travel galleries',
-      'Managing booking availability and preventing double bookings',
+      'Connecting the Next.js frontend to a separate Express.js API',
+      'Managing destination and booking data with MongoDB',
+      'Associating bookings with the correct authenticated user',
+      'Handling authentication states across protected user features',
+      'Creating a consistent and responsive travel browsing experience',
     ],
+
     futureImprovements: [
-      'AI-powered trip recommendations based on preferences',
-      'Integration with flight and hotel APIs for complete packages',
-      'Social features for sharing travel experiences',
-      'Multi-language support for international users',
-      'Offline itinerary access for travelers',
+      'Advanced destination search and filtering',
+      'Wishlist functionality for saving favorite destinations',
+      'Destination reviews and rating system',
+      'Booking status management and cancellation support',
+      'Integration with external flight and hotel APIs',
+      'Interactive maps and personalized travel recommendations',
     ],
   },
+
+  // =========================================================
+  // BANGLA SANGBAD
+  // =========================================================
   'bangla-sangbad': {
     slug: 'bangla-sangbad',
     title: 'Bangla Sangbad',
-    tagline: 'Your trusted source for Bengali news',
+    tagline: 'বাংলা সংবাদ — আপনার বিশ্বস্ত সংবাদমাধ্যম',
     description:
-      'A modern Bengali news platform delivering up-to-date news articles across various categories. Features include category-based browsing, trending stories, search functionality, and a clean, reader-friendly interface optimized for the Bengali language.',
+      'A modern Bengali news platform built to make discovering and reading news easier. It provides an organized news browsing experience with category-based navigation, article discovery, and a responsive interface designed for Bengali readers.',
+
     overview: {
       problem:
-        'Many Bengali news platforms have cluttered interfaces and poor mobile experiences. Readers need a clean, fast, and accessible way to consume news in their native language.',
+        'Readers need a convenient way to discover news across different categories in their native language. A cluttered layout or inconsistent reading experience can make finding relevant information difficult, particularly on mobile devices.',
+
       features: [
-        'Category-wise news browsing (Politics, Sports, Entertainment, etc.)',
-        'Trending and featured articles section',
-        'Full-text search across news articles',
-        'Responsive reading experience with optimized typography',
-        'Article sharing functionality',
-        'Admin panel for content management',
-        'SEO-optimized for better discoverability',
+        'Browse news articles across different categories',
+        'Discover the latest and featured news stories',
+        'Search for relevant news articles',
+        'Read detailed news articles through dedicated pages',
+        'Enjoy a responsive interface optimized for Bengali content',
+        'Authenticate users with Better Auth',
+        'Retrieve news data through a separate REST API',
+        'Receive contextual toast notifications through Sonner',
       ],
     },
+
     techStack: {
-      frontend: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'React Markdown'],
-      backend: ['Next.js API Routes'],
-      database: ['MongoDB', 'Mongoose'],
-      tools: ['Tinymce Editor', 'Vercel'],
+      frontend: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+
+      backend: ['Node.js', 'Express.js', 'REST API'],
+
+      database: ['MongoDB'],
+
+      authentication: ['Better Auth'],
+
+      tools: ['Sonner', 'Vercel', 'Git', 'GitHub'],
     },
-    image: '/images/projects/bangla-sangbad.jpg',
-    liveUrl: 'https://bangla-sangbad-demo.vercel.app',
-    githubUrl: 'https://github.com/fayzur/bangla-sangbad-client',
+
+    image: banglaSanbad,
+
+    liveUrl: 'https://bangla-sangbad.vercel.app',
+    githubUrl: 'https://github.com/fayzur030/bangla-sangbad',
+
     challenges: [
-      'Optimizing Bengali font rendering and typography',
-      'Building an efficient content management system',
-      'Implementing proper SEO for news articles',
-      'Handling large volumes of content with fast loading times',
+      'Designing a readable and responsive interface for Bengali news content',
+      'Integrating the frontend with a separate Express.js REST API',
+      'Managing news data retrieved from MongoDB',
+      'Handling authentication within the news platform',
+      'Maintaining a consistent reading experience across screen sizes',
     ],
+
     futureImprovements: [
-      'Push notifications for breaking news',
-      'Commenting system for reader engagement',
-      'Newsletter subscription functionality',
-      'Dark mode optimization for late-night reading',
-      'Integration with social media for wider reach',
+      'Advanced search with category and date filters',
+      'Bookmarking functionality for saving articles',
+      'Breaking news notifications',
+      'Reader comments and engagement features',
+      'Personalized news recommendations',
+      'Improved article metadata and SEO',
     ],
   },
 }
