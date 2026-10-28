@@ -35,18 +35,18 @@ export default function ExperienceSection() {
   return (
     <section
       id='experience'
-      className='relative isolate overflow-hidden  px-5 py-20 text-foreground transition-colors duration-300 sm:px-8 lg:px-12 lg:py-28'
+      className='relative isolate overflow-hidden max-w-7xl mx-auto px-5 py-20 text-foreground transition-colors duration-300 sm:px-8  lg:py-28'
     >
       {/* Background Effects */}{' '}
       <div
         aria-hidden='true'
-        className='pointer-events-none absolute -left-40 top-32 -z-10 h-80 w-80 rounded-full bg-primary/[0.08] blur-[120px]'
+        className='pointer-events-none absolute -left-40 top-32 -z-10 h-80 w-80 rounded-full '
       />
       <div
         aria-hidden='true'
-        className='pointer-events-none absolute -right-40 bottom-10 -z-10 h-80 w-80 rounded-full bg-accent/70 blur-[120px]'
+        className='pointer-events-none absolute -right-40 bottom-10 -z-10 h-80 w-80 rounded-full '
       />
-      <div className='relative mx-auto max-w-7xl'>
+      <div className='relative '>
         {/* Section Heading */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -81,7 +81,7 @@ export default function ExperienceSection() {
         </motion.div>
 
         {/* Experience Timeline */}
-        <div className='relative mx-auto max-w-7xl'>
+        <div className='relative '>
           {/* Timeline Line */}
           <div
             aria-hidden='true'

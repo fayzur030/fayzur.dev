@@ -104,7 +104,7 @@ function TechnologyBadge({ technology }: { technology: Technology }) {
       {Icon ? (
         <Icon
           className={`h-3.5 w-3.5 shrink-0 ${
-            isWhite ? 'text-zinc-800 dark:text-zinc-200' : ''
+            isWhite ? 'text-zinc-800 dark:text-zinc-200' : ''  
           }`}
           style={isWhite ? undefined : { color: technology.color }}
           aria-hidden='true'
@@ -154,14 +154,14 @@ export default function SkillsSection() {
   return (
     <section
       id='skills'
-      className='  px-4 py-20 text-zinc-900 transition-colors duration-300  dark:text-white sm:px-6 sm:py-24 lg:px-8 lg:py-28'
+      className=' px-4 py-20 text-zinc-900 max-w-7xl mx-auto transition-colors duration-300  dark:text-white sm:px-16 sm:py-24 lg:px-8 lg:py-28'
     >
       {/* Background Accent */}{' '}
       <div
         aria-hidden='true'
         className='pointer-events-none absolute -top-40 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-[#C2F800]/8 blur-[120px] dark:bg-[#C2F800]/[0.035]'
       />
-      <div className='relative mx-auto max-w-6xl'>
+      <div className='relative mx-auto max-w-7xl'>
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
