@@ -81,11 +81,12 @@ export default function ExperienceSection() {
         </motion.div>
 
         {/* Experience Timeline */}
-        <div className='relative '>
-          {/* Timeline Line */}
+
+        <div className='relative'>
+          {/* Timeline Line - Hidden on Mobile */}
           <div
             aria-hidden='true'
-            className='absolute bottom-8 left-5 top-8 w-px bg-gradient-to-b from-primary/70 via-primary/20 to-transparent sm:left-7'
+            className='absolute bottom-8 left-5 top-8 hidden w-px bg-linear-to-b from-primary/70 via-primary/20 to-transparent sm:left-7 sm:block'
           />
 
           <motion.article
@@ -93,10 +94,10 @@ export default function ExperienceSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.65 }}
-            className='relative pl-12 sm:pl-16'
+            className='relative pl-0 sm:pl-16'
           >
             {/* Timeline Marker */}
-            <div className='absolute left-0 top-7 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-background shadow-[0_0_25px_rgba(56,189,248,0.12)] sm:left-2'>
+            <div className='absolute left-0 top-7 z-10 hidden h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-background shadow-[0_0_25px_rgba(56,189,248,0.12)] sm:left-2 md:flex'>
               <div className='h-3 w-3 rounded-full bg-primary shadow-[0_0_12px_rgba(56,189,248,0.7)]' />
             </div>
 

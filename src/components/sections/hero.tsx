@@ -1,14 +1,14 @@
 'use client'
-
-import { ArrowDownToLine } from 'lucide-react'
+import { ArrowDownToLine, ArrowRight } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+
 import { GithubIcon, LinkedinIcon } from '@/components/website/brand-icons'
 import { motion } from 'framer-motion'
 import { Typewriter } from 'react-simple-typewriter'
 import { Reveal } from '@/components/website/reveal'
 import { site } from '@/lib/portfolio'
 import Photo from '../website/photo'
+import { cn } from 'cn'
 
 export function Hero() {
   const socials = [
@@ -63,17 +63,10 @@ export function Hero() {
           {/* CTA Buttons */}
 
           {/* CTA Buttons & Social Links */}
-          <div className='mt-8 flex flex-wrap items-center gap-4'>
+          <div className='mt-8 flex items-center gap-4'>
             {/* Download CV */}
 
-            <a
-              href='/Fayzur-Rahman-CV.pdf'
-              download
-              // className={cn(
-              //   buttonVariants({ variant: 'aqua', size: 'lg' }),
-              //   'group relative h-11 gap-2 overflow-hidden rounded-xl border border-cyan-400/30 bg-gradient-to-r from-cyan-500 to-blue-600 px-5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/60 hover:from-cyan-400 hover:to-blue-500 hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] active:translate-y-0'
-              // )}
-            >
+            <a href='/Fayzur-Rahman-CV.pdf' download>
               <Button
                 variant={'default'}
                 size={'lg'}
@@ -86,32 +79,45 @@ export function Hero() {
                 />
               </Button>
             </a>
+            <a
+              href='#projects'
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'lg' }),
+                'group cursor-pointer text-[#0B1020] dark:text-white'
+              )}
+            >
+              <span>View Projects</span>
 
-            {/* Social Links */}
-            <div className='flex items-center gap-3'>
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  title={
-                    unconfined
-                      ? 'Add your real link in src/lib/portfolio.ts'
-                      : social.label
-                  }
-                  aria-label={social.label}
-                  // className='inline-flex size-11 items-center justify-center rounded-xl border border-slate-300 text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-slate-950 dark:border-border/70 dark:text-muted-foreground dark:hover:border-ring/40 dark:hover:text-foreground'
-                  className='flex size-9 items-center justify-center rounded-full border border-slate-300 bg-white/70 text-slate-600 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.03] dark:text-muted-foreground dark:hover:border-primary dark:hover:bg-primary dark:hover:text-slate-950'
-                >
-                  {social.label === 'GitHub' ? (
-                    <GithubIcon className='size-4' />
-                  ) : (
-                    <LinkedinIcon className='size-4' />
-                  )}
-                </a>
-              ))}
-            </div>
+              <ArrowRight
+                aria-hidden='true'
+                className='size-4 transition-transform duration-300 group-hover:translate-x-1'
+              />
+            </a>
+          </div>
+          {/* Social Links */}
+          <div className='flex items-center gap-3 mt-5'>
+            {socials.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                title={
+                  unconfined
+                    ? 'Add your real link in src/lib/portfolio.ts'
+                    : social.label
+                }
+                aria-label={social.label}
+                // className='inline-flex size-11 items-center justify-center rounded-xl border border-slate-300 text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-slate-950 dark:border-border/70 dark:text-muted-foreground dark:hover:border-ring/40 dark:hover:text-foreground'
+                className='flex size-9 items-center justify-center rounded-full border border-slate-300 bg-white/70 text-slate-600 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.03] dark:text-muted-foreground dark:hover:border-primary dark:hover:bg-primary dark:hover:text-slate-950'
+              >
+                {social.label === 'GitHub' ? (
+                  <GithubIcon className='size-4' />
+                ) : (
+                  <LinkedinIcon className='size-4' />
+                )}
+              </a>
+            ))}
           </div>
         </Reveal>
 

@@ -94,7 +94,7 @@ export default function About() {
   return (
     <section
       id='about'
-      className='relative isolate w-full max-w-full overflow-x-clip py-16 sm:py-20 lg:py-32'
+      className='relative isolate w-full max-w-full overflow-x-clip py-16 sm:py-20 lg:py-25'
     >
       {/* Background Glow */}
       <div

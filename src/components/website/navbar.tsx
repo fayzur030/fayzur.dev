@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ArrowDownToLine, Menu, X } from 'lucide-react'
+import { ArrowDownToLine, ArrowRight, Menu, X } from 'lucide-react'
 import { cn } from 'cn'
 import { navLinks, site } from '@/lib/portfolio'
 import { ThemeToggle } from '@/components/website/theme-toggle'
 import Link from 'next/link'
+import { Button } from '../ui/button'
 
 const SECTIONS = navLinks.map((link) => link.href.slice(1))
 
@@ -117,7 +118,7 @@ export function Navbar() {
           href='#main'
           className={cn(
             'sr-only focus:not-sr-only',
-            'focus:absolute focus:left-4 focus:top-4 focus:z-[100]',
+            'focus:absolute focus:left-4 focus:top-4 focus:z-100',
             'focus:rounded-lg focus:bg-background',
             'focus:px-4 focus:py-2 focus:text-sm',
             'focus:text-foreground focus:ring-2 focus:ring-primary'
@@ -130,7 +131,7 @@ export function Navbar() {
           className={cn(
             'mx-auto flex w-full max-w-7xl items-center justify-between',
             'gap-2 px-3 sm:gap-4 sm:px-6 lg:px-8',
-            'h-16 sm:h-[72px]'
+            'h-16 sm:h-18'
           )}
           aria-label='Primary navigation'
         >
@@ -160,7 +161,7 @@ export function Navbar() {
                 aria-hidden='true'
                 className={cn(
                   'absolute inset-0 -translate-x-full',
-                  'bg-gradient-to-r from-transparent via-primary/15 to-transparent',
+                  'bg-linear-to-r from-transparent via-primary/15 to-transparent',
                   'transition-transform duration-700',
                   'group-hover:translate-x-full'
                 )}
@@ -195,7 +196,7 @@ export function Navbar() {
                     <span
                       aria-hidden='true'
                       className={cn(
-                        'absolute inset-x-3 -bottom-0.5 h-[2px]',
+                        'absolute inset-x-3 -bottom-0.5 h-0.5',
                         'origin-center rounded-full bg-primary',
                         'transition-transform duration-300',
                         isActive
@@ -207,7 +208,7 @@ export function Navbar() {
                     {isActive && (
                       <span
                         aria-hidden='true'
-                        className='absolute inset-x-3 -bottom-0.5 h-[2px] rounded-full bg-primary blur-[5px]'
+                        className='absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-primary blur-[5px]'
                       />
                     )}
                   </a>
@@ -219,38 +220,19 @@ export function Navbar() {
           {/* Right Actions */}
           <div className='flex shrink-0 items-center gap-1.5 sm:gap-3'>
             {/* Desktop CV Button: hidden on mobile */}
-            <a
-              href='/Fayzur-Rahman-CV.pdf'
-              download
-              aria-label='Download CV'
-              className={cn(
-                'group relative hidden h-10 shrink-0 items-center justify-center gap-2',
-                'overflow-hidden rounded-xl',
-                'border border-primary/40 bg-primary',
-                'px-4 text-sm font-bold dark:text-[#0B1020] text-[#ffffff]',
-                'transition-all duration-300',
-                'hover:-translate-y-0.5 hover:border-primary',
-                'hover:shadow-[0_0_24px_rgba(194,248,0,0.2)]',
-                'active:translate-y-0',
-                'lg:inline-flex'
-              )}
-            >
-              <span
-                aria-hidden='true'
-                className={cn(
-                  'absolute inset-0 -translate-x-full',
-                  'bg-gradient-to-r from-transparent via-white/20 to-transparent',
-                  'transition-transform duration-500',
-                  'group-hover:translate-x-full'
-                )}
-              />
-
-              <span className='relative whitespace-nowrap'>Download CV</span>
-
-              <ArrowDownToLine
-                className='relative size-4 shrink-0 transition-transform duration-300 group-hover:translate-y-0.5'
-                aria-hidden='true'
-              />
+            <a href='#contact'>
+              <Button
+                id='projects'
+                variant={'outline'}
+                size={'lg'}
+                className={`text-muted-foreground  cursor-pointer hidden md:block`}
+              >
+                <span className='relative z-10'>Let&apos;s Talk</span>
+                {/* <ArrowRight
+                  className='relative z-10 size-4 transition-transform duration-300 group-hover:translate-y-1'
+                  aria-hidden='true'
+                /> */}
+              </Button>
             </a>
 
             {/* Theme Toggle */}
@@ -293,7 +275,7 @@ export function Navbar() {
       <div
         id='mobile-nav'
         className={cn(
-          'fixed inset-0 z-[60] lg:hidden',
+          'fixed inset-0 z-60 lg:hidden',
           open ? 'pointer-events-auto visible' : 'pointer-events-none invisible'
         )}
         aria-hidden={!open}
@@ -343,22 +325,6 @@ export function Navbar() {
                 </p>
               </div>
             </div>
-
-            <button
-              type='button'
-              onClick={closeMenu}
-              aria-label='Close navigation menu'
-              className={cn(
-                'inline-flex size-9 shrink-0 items-center justify-center',
-                'rounded-xl border border-border/70',
-                'text-muted-foreground transition-colors',
-                'hover:border-primary/40 hover:text-foreground',
-                'focus-visible:outline-none focus-visible:ring-2',
-                'focus-visible:ring-primary/60'
-              )}
-            >
-              <X className='size-4' aria-hidden='true' />
-            </button>
           </div>
 
           {/* Mobile Navigation Links */}
@@ -408,38 +374,20 @@ export function Navbar() {
             })}
           </ul>
 
-          {/* Mobile Download CV Button */}
-          <a
-            href='/Fayzur-Rahman-CV.pdf'
-            download
-            onClick={closeMenu}
-            className={cn(
-              'group relative mt-6 inline-flex h-12 shrink-0 items-center justify-center gap-2.5',
-              'overflow-hidden rounded-xl',
-              'border border-primary/40 bg-primary',
-              'text-sm font-bold text-[#0B1020]',
-              'transition-all duration-300',
-              'hover:border-primary',
-              'hover:shadow-[0_0_24px_rgba(194,248,0,0.2)]',
-              'active:scale-[0.98]'
-            )}
-          >
-            <span
-              aria-hidden='true'
-              className={cn(
-                'absolute inset-0 -translate-x-full',
-                'bg-gradient-to-r from-transparent via-white/25 to-transparent',
-                'transition-transform duration-500',
-                'group-hover:translate-x-full'
-              )}
-            />
-
-            <ArrowDownToLine
-              className='relative size-4 shrink-0 transition-transform duration-300 group-hover:translate-y-0.5'
-              aria-hidden='true'
-            />
-
-            <span className='relative'>Download My CV</span>
+          {/* Mobile Let's Talk Button */}
+          <a>
+            <Button
+              id='projects'
+              variant={'outline'}
+              size={'lg'}
+              className={`text-muted-foreground  cursor-pointer w-full `}
+            >
+              <span className='relative z-10'>Let&apos;s Talk</span>
+              {/* <ArrowRight
+                  className='relative z-10 size-4 transition-transform duration-300 group-hover:translate-y-1'
+                  aria-hidden='true'
+                /> */}
+            </Button>
           </a>
 
           {/* Drawer Footer */}
