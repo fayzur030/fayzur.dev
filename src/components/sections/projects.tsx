@@ -35,7 +35,10 @@ const cardVariants = {
 
 export function Projects() {
   return (
-    <section id='projects' className='relative z-10 px-4 py-24 sm:px-6'>
+    <section
+      id='projects'
+      className='relative z-10 px-4 py-24 sm:px-6 max-w-7xl mx-auto'
+    >
       <div className='mx-auto max-w-7xl'>
         <SectionHeading
           index='03 / projects'
