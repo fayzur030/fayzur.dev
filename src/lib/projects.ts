@@ -1,5 +1,6 @@
 import banglaSanbad from '@/assets/bangla_sonbad.png'
 import bazarDor from '@/assets/bazar_dor.png'
+import fit_log from '@/assets/fit_log.png'
 import { StaticImageData } from 'next/image'
 
 export type ProjectDetails = {
@@ -67,6 +68,22 @@ export const projects: Project[] = [
     ],
     image: bazarDor,
     initials: 'BD',
+  },
+  {
+    slug: 'fit-log',
+    title: 'Fit Log',
+    description:
+      'A fitness tracking application designed to help users monitor their workouts, track fitness progress, and manage their fitness journey through a clean, responsive, and user-friendly interface.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+    ],
+    image: fit_log,
+    initials: 'FL',
   },
 
   // {
@@ -226,63 +243,63 @@ export const projectDetails: Record<string, ProjectDetails> = {
   // =========================================================
   // WANDERLY TRAVEL
   // =========================================================
-  'wanderly-travel': {
-    slug: 'wanderly-travel',
-    title: 'Wanderly Travel',
-    tagline: 'Discover Destinations. Plan Your Next Adventure.',
-    description:
-      'A full-stack travel booking platform that allows users to explore travel destinations, discover experiences, and manage their bookings through a responsive interface.',
+  // 'wanderly-travel': {
+  //   slug: 'wanderly-travel',
+  //   title: 'Wanderly Travel',
+  //   tagline: 'Discover Destinations. Plan Your Next Adventure.',
+  //   description:
+  //     'A full-stack travel booking platform that allows users to explore travel destinations, discover experiences, and manage their bookings through a responsive interface.',
 
-    overview: {
-      problem:
-        'Travelers need a convenient way to discover destinations, review travel options, and keep track of their reservations. Managing destination information and bookings across disconnected platforms can make the planning process unnecessarily complicated.',
+  //   overview: {
+  //     problem:
+  //       'Travelers need a convenient way to discover destinations, review travel options, and keep track of their reservations. Managing destination information and bookings across disconnected platforms can make the planning process unnecessarily complicated.',
 
-      features: [
-        'Explore available travel destinations',
-        'View destination details and travel information',
-        'Browse travel experiences by destination category',
-        'Register and log in to access user features',
-        'Create travel bookings for selected destinations',
-        'View personal booking history',
-        'Manage destination and booking data through API integration',
-        'Use a responsive interface across desktop, tablet, and mobile devices',
-      ],
-    },
+  //     features: [
+  //       'Explore available travel destinations',
+  //       'View destination details and travel information',
+  //       'Browse travel experiences by destination category',
+  //       'Register and log in to access user features',
+  //       'Create travel bookings for selected destinations',
+  //       'View personal booking history',
+  //       'Manage destination and booking data through API integration',
+  //       'Use a responsive interface across desktop, tablet, and mobile devices',
+  //     ],
+  //   },
 
-    techStack: {
-      frontend: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+  //   techStack: {
+  //     frontend: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
 
-      backend: ['Node.js', 'Express.js', 'REST API'],
+  //     backend: ['Node.js', 'Express.js', 'REST API'],
 
-      database: ['MongoDB'],
+  //     database: ['MongoDB'],
 
-      authentication: ['Better Auth'],
+  //     authentication: ['Better Auth'],
 
-      tools: ['Vercel', 'Render', 'Git', 'GitHub'],
-    },
+  //     tools: ['Vercel', 'Render', 'Git', 'GitHub'],
+  //   },
 
-    image: '/images/projects/wanderly-travel.jpg',
+  //   image: '/images/projects/wanderly-travel.jpg',
 
-    liveUrl: 'https://wanderly-travel.vercel.app',
-    githubUrl: 'https://github.com/fayzur030/wanderly-travel',
+  //   liveUrl: 'https://wanderly-travel.vercel.app',
+  //   githubUrl: 'https://github.com/fayzur030/wanderly-travel',
 
-    challenges: [
-      'Connecting the Next.js frontend to a separate Express.js API',
-      'Managing destination and booking data with MongoDB',
-      'Associating bookings with the correct authenticated user',
-      'Handling authentication states across protected user features',
-      'Creating a consistent and responsive travel browsing experience',
-    ],
+  //   challenges: [
+  //     'Connecting the Next.js frontend to a separate Express.js API',
+  //     'Managing destination and booking data with MongoDB',
+  //     'Associating bookings with the correct authenticated user',
+  //     'Handling authentication states across protected user features',
+  //     'Creating a consistent and responsive travel browsing experience',
+  //   ],
 
-    futureImprovements: [
-      'Advanced destination search and filtering',
-      'Wishlist functionality for saving favorite destinations',
-      'Destination reviews and rating system',
-      'Booking status management and cancellation support',
-      'Integration with external flight and hotel APIs',
-      'Interactive maps and personalized travel recommendations',
-    ],
-  },
+  //   futureImprovements: [
+  //     'Advanced destination search and filtering',
+  //     'Wishlist functionality for saving favorite destinations',
+  //     'Destination reviews and rating system',
+  //     'Booking status management and cancellation support',
+  //     'Integration with external flight and hotel APIs',
+  //     'Interactive maps and personalized travel recommendations',
+  //   ],
+  // },
 
   // =========================================================
   // BANGLA SANGBAD
@@ -342,6 +359,61 @@ export const projectDetails: Record<string, ProjectDetails> = {
       'Reader comments and engagement features',
       'Personalized news recommendations',
       'Improved article metadata and SEO',
+    ],
+  },
+  'fit-log': {
+    slug: 'fit-log',
+    title: 'Fit Log',
+    tagline: 'Track Your Fitness. Build Better Habits.',
+    description:
+      'A fitness tracking application designed to help users manage their fitness journey, monitor workout activities, and maintain a consistent exercise routine. Built with a responsive interface to provide a smooth and user-friendly fitness tracking experience.',
+
+    overview: {
+      problem:
+        'Maintaining a consistent fitness routine can be challenging without a convenient way to organize workout activities and monitor progress. Fit Log aims to simplify fitness management by providing an organized platform for tracking workouts and building healthier habits.',
+
+      features: [
+        'Track and manage workout activities',
+        'Organize fitness information through a structured interface',
+        'Monitor workout progress and maintain exercise consistency',
+        'Explore fitness information through a clean dashboard',
+        'Navigate a responsive interface across desktop and mobile devices',
+        'Manage fitness activities through an intuitive user experience',
+      ],
+    },
+
+    techStack: {
+      frontend: ['React', 'TypeScript', 'Tailwind CSS'],
+
+      backend: ['Node.js', 'Express.js', 'REST API'],
+
+      database: ['MongoDB'],
+
+      authentication: [],
+
+      tools: ['Vercel', 'Git', 'GitHub'],
+    },
+
+    image: fit_log,
+
+    liveUrl: 'https://fit-log-mu.vercel.app',
+    githubUrl: 'https://github.com/fayzur030/fit-log',
+
+    challenges: [
+      'Designing a clean and user-friendly fitness tracking interface',
+      'Organizing workout information for easy management',
+      'Building a responsive layout for different screen sizes',
+      'Connecting the frontend with backend API endpoints',
+      'Managing fitness data through MongoDB',
+    ],
+
+    futureImprovements: [
+      'Personalized workout plans based on fitness goals',
+      'Visual workout progress tracking with interactive charts',
+      'Daily and weekly fitness activity summaries',
+      'Workout history with advanced filtering options',
+      'Goal setting and progress notifications',
+      'Personalized fitness statistics and analytics',
     ],
   },
 }

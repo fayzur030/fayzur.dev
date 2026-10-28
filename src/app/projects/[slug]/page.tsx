@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation'
 import { projectDetails, projects } from '@/lib/projects'
 import { Navbar } from '@/components/website/navbar'
-import { Footer } from '@/components/sections/footer'
+
 import { ProjectDetailsPage } from '@/components/sections/project-details'
 import { Metadata } from 'next'
+import Footer from '@/components/sections/footer'
 
 interface ProjectPageProps {
   params: Promise<{
@@ -17,7 +18,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params
   const project = projectDetails[slug]
 
@@ -44,7 +47,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <>
       <Navbar />
-      <main className="relative min-h-screen pt-20">
+      <main className='relative min-h-screen pt-20'>
         <ProjectDetailsPage project={project} />
       </main>
       <Footer />
