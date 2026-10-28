@@ -1,3 +1,5 @@
+import image from '@/assets/bangla_sonbad.png'
+
 export type ProjectDetails = {
   slug: string
   title: string
@@ -33,15 +35,24 @@ export const projects: Project[] = [
   {
     slug: 'bazar-inventory',
     title: 'Bazar & Inventory Management',
-    description: 'A full-stack inventory management application for managing products, stock levels, and pricing.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB'],
+    description:
+      'A full-stack inventory management application for managing products, stock levels, and pricing.',
+    tech: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+    ],
     image: '/images/projects/bazar-inventory.jpg',
     initials: 'BI',
   },
   {
     slug: 'wanderly-travel',
     title: 'Wanderly Travel',
-    description: 'A travel booking platform for exploring destinations and managing travel bookings.',
+    description:
+      'A travel booking platform for exploring destinations and managing travel bookings.',
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Express.js', 'MongoDB'],
     image: '/images/projects/wanderly-travel.jpg',
     initials: 'WT',
@@ -49,9 +60,10 @@ export const projects: Project[] = [
   {
     slug: 'bangla-sangbad',
     title: 'Bangla Sangbad',
-    description: 'A modern Bengali news platform for browsing news articles and discovering trending stories.',
+    description:
+      'A modern Bengali news platform for browsing news articles and discovering trending stories.',
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
-    image: '/images/projects/bangla-sangbad.jpg',
+    image: image,
     initials: 'BS',
   },
 ]
@@ -61,9 +73,11 @@ export const projectDetails: Record<string, ProjectDetails> = {
     slug: 'bazar-inventory',
     title: 'Bazar & Inventory Management',
     tagline: 'Streamlined inventory control for retail businesses',
-    description: 'A comprehensive full-stack solution designed to help businesses efficiently manage their inventory, track product stock levels, monitor pricing, and streamline purchasing operations. Built with scalability and ease of use in mind.',
+    description:
+      'A comprehensive full-stack solution designed to help businesses efficiently manage their inventory, track product stock levels, monitor pricing, and streamline purchasing operations. Built with scalability and ease of use in mind.',
     overview: {
-      problem: 'Small to medium-sized retailers often struggle with manual inventory tracking, leading to stockouts, overstocking, and pricing inconsistencies. Traditional methods are time-consuming and prone to errors.',
+      problem:
+        'Small to medium-sized retailers often struggle with manual inventory tracking, leading to stockouts, overstocking, and pricing inconsistencies. Traditional methods are time-consuming and prone to errors.',
       features: [
         'Product catalog management with categories and variants',
         'Real-time stock level tracking and low-stock alerts',
@@ -75,7 +89,13 @@ export const projectDetails: Record<string, ProjectDetails> = {
       ],
     },
     techStack: {
-      frontend: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'React Hook Form', 'shadcn/ui'],
+      frontend: [
+        'Next.js 15',
+        'TypeScript',
+        'Tailwind CSS',
+        'React Hook Form',
+        'shadcn/ui',
+      ],
       backend: ['Node.js', 'Express.js', 'REST API'],
       database: ['MongoDB', 'Mongoose ODM'],
       tools: ['JWT Authentication', 'Vercel', 'Cloudinary'],
@@ -101,9 +121,11 @@ export const projectDetails: Record<string, ProjectDetails> = {
     slug: 'wanderly-travel',
     title: 'Wanderly Travel',
     tagline: 'Discover and book your perfect adventure',
-    description: 'A modern travel booking platform that connects travelers with amazing destinations. Users can explore curated travel packages, make bookings, manage itineraries, and share their experiences all in one seamless platform.',
+    description:
+      'A modern travel booking platform that connects travelers with amazing destinations. Users can explore curated travel packages, make bookings, manage itineraries, and share their experiences all in one seamless platform.',
     overview: {
-      problem: 'Travel planning is fragmented across multiple platforms - finding destinations, comparing prices, and managing bookings can be overwhelming and time-consuming.',
+      problem:
+        'Travel planning is fragmented across multiple platforms - finding destinations, comparing prices, and managing bookings can be overwhelming and time-consuming.',
       features: [
         'Destination discovery with rich media galleries',
         'Interactive travel package browsing and filtering',
@@ -141,9 +163,11 @@ export const projectDetails: Record<string, ProjectDetails> = {
     slug: 'bangla-sangbad',
     title: 'Bangla Sangbad',
     tagline: 'Your trusted source for Bengali news',
-    description: 'A modern Bengali news platform delivering up-to-date news articles across various categories. Features include category-based browsing, trending stories, search functionality, and a clean, reader-friendly interface optimized for the Bengali language.',
+    description:
+      'A modern Bengali news platform delivering up-to-date news articles across various categories. Features include category-based browsing, trending stories, search functionality, and a clean, reader-friendly interface optimized for the Bengali language.',
     overview: {
-      problem: 'Many Bengali news platforms have cluttered interfaces and poor mobile experiences. Readers need a clean, fast, and accessible way to consume news in their native language.',
+      problem:
+        'Many Bengali news platforms have cluttered interfaces and poor mobile experiences. Readers need a clean, fast, and accessible way to consume news in their native language.',
       features: [
         'Category-wise news browsing (Politics, Sports, Entertainment, etc.)',
         'Trending and featured articles section',

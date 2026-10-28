@@ -8,14 +8,15 @@ import {
   Lightbulb,
   Puzzle,
   Sparkles,
-  // Github,
-  // Linkedin,
   Mail,
   ArrowUpRight,
 } from 'lucide-react'
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 
 import image from '@/assets/about_image.png'
 import { SectionHeading } from '../website/section-heading'
+import { GithubIcon, LinkedinIcon } from '../website/brand-icons'
+import { site } from '@/lib/portfolio'
 
 const journey = [
   {
@@ -61,24 +62,17 @@ const borderColors = [
   'hover:border-sky-400/50 dark:hover:border-sky-400/40',
 ]
 
-const socialLinks = [
+const socials = [
   {
-    name: 'GitHub',
-    href: 'https://github.com/your-username',
-    icon: Mail,
+    label: 'GitHub',
+    href: 'https://github.com/fayzur030',
   },
   {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/your-username/',
-    icon: Mail,
-  },
-  {
-    name: 'Email',
-    href: 'mailto:your-email@example.com',
-    icon: Mail,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/md-fayzur-rahman/',
   },
 ]
-
+const unconfined = !site.links.github || !site.links.linkedin
 export default function About() {
   const shouldReduceMotion = useReducedMotion()
 
@@ -130,7 +124,7 @@ export default function About() {
         </motion.div>
 
         {/* Main Layout */}
-        <div className='mt-16 grid items-start gap-14 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-16'>
+        <div className='mt-16 grid items-start gap-14 lg:grid-cols-[340px_minmax(0,1fr)] lg:gap-16'>
           {/* LEFT: Profile and Introduction */}
           <motion.aside
             variants={fadeUp}
@@ -175,13 +169,13 @@ export default function About() {
               </p>
 
               {/* Status Badge */}
-              <div className='mt-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-3 py-2 text-xs font-medium text-zinc-700 dark:text-zinc-300'>
+              {/* <div className='mt-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-3 py-2 text-xs font-medium text-zinc-700 dark:text-zinc-300'>
                 <span className='relative flex h-2 w-2'>
                   <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60' />
                   <span className='relative inline-flex h-2 w-2 rounded-full bg-cyan-400' />
                 </span>
                 Always learning. Always building.
-              </div>
+              </div> */}
 
               {/* Social Links */}
               <div className='mt-7'>
@@ -189,40 +183,29 @@ export default function About() {
                   Connect with me
                 </p>
 
-                <div className='flex flex-wrap items-center gap-3'>
-                  {socialLinks.map((social) => {
-                    const Icon = social.icon
-
-                    return (
-                      <a
-                        key={social.name}
-                        href={social.href}
-                        target={social.name === 'Email' ? undefined : '_blank'}
-                        rel={
-                          social.name === 'Email'
-                            ? undefined
-                            : 'noopener noreferrer'
-                        }
-                        aria-label={social.name}
-                        className='group/link inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white/70 px-3 py-2.5 text-sm font-medium text-zinc-700 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:bg-cyan-400/5 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.025] dark:text-zinc-300 dark:hover:border-cyan-400/40 dark:hover:text-cyan-400'
-                      >
-                        <Icon
-                          size={17}
-                          strokeWidth={1.8}
-                          className='transition-transform duration-300 group-hover/link:scale-110'
-                        />
-
-                        <span>{social.name}</span>
-
-                        {social.name !== 'Email' && (
-                          <ArrowUpRight
-                            size={13}
-                            className='text-zinc-400 transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 group-hover/link:text-cyan-400'
-                          />
-                        )}
-                      </a>
-                    )
-                  })}
+                <div className='flex items-center gap-3'>
+                  {socials.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      title={
+                        unconfined
+                          ? 'Add your real link in src/lib/portfolio.ts'
+                          : social.label
+                      }
+                      aria-label={social.label}
+                      // className='inline-flex size-11 items-center justify-center rounded-xl border border-slate-300 text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-slate-950 dark:border-border/70 dark:text-muted-foreground dark:hover:border-ring/40 dark:hover:text-foreground'
+                      className='flex size-9 items-center justify-center rounded-full border border-slate-300 bg-white/70 text-slate-600 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.03] dark:text-muted-foreground dark:hover:border-primary dark:hover:bg-primary dark:hover:text-slate-950'
+                    >
+                      {social.label === 'GitHub' ? (
+                        <GithubIcon className='size-4' />
+                      ) : (
+                        <LinkedinIcon className='size-4' />
+                      )}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
