@@ -2,7 +2,17 @@
 
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'motion/react'
-import { Code2, Heart, Lightbulb, Puzzle, Sparkles } from 'lucide-react'
+import {
+  Code2,
+  Heart,
+  Lightbulb,
+  Puzzle,
+  Sparkles,
+  // Github,
+  // Linkedin,
+  Mail,
+  ArrowUpRight,
+} from 'lucide-react'
 
 import image from '@/assets/about_image.png'
 import { SectionHeading } from '../website/section-heading'
@@ -47,11 +57,26 @@ const journey = [
 
 const borderColors = [
   'hover:border-cyan-400/50 dark:hover:border-cyan-400/40',
-  'hover:border-violet-400/50 dark:hover:border-violet-400/40',
-  'hover:border-emerald-400/50 dark:hover:border-emerald-400/40',
-  'hover:border-amber-400/50 dark:hover:border-amber-400/40',
-  'hover:border-rose-400/50 dark:hover:border-rose-400/40',
   'hover:border-blue-400/50 dark:hover:border-blue-400/40',
+  'hover:border-sky-400/50 dark:hover:border-sky-400/40',
+]
+
+const socialLinks = [
+  {
+    name: 'GitHub',
+    href: 'https://github.com/your-username',
+    icon: Mail,
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/your-username/',
+    icon: Mail,
+  },
+  {
+    name: 'Email',
+    href: 'mailto:your-email@example.com',
+    icon: Mail,
+  },
 ]
 
 export default function About() {
@@ -77,7 +102,7 @@ export default function About() {
       id='about'
       className='relative isolate w-full max-w-full overflow-x-clip py-16 sm:py-20 lg:py-32'
     >
-      {/* Background glow */}
+      {/* Background Glow */}
       <div
         aria-hidden='true'
         className='pointer-events-none absolute -left-40 top-20 -z-10 h-80 w-80 rounded-full bg-cyan-400/[0.07] blur-[110px]'
@@ -85,11 +110,11 @@ export default function About() {
 
       <div
         aria-hidden='true'
-        className='pointer-events-none absolute -right-40 bottom-10 -z-10 h-80 w-80 rounded-full bg-lime-400/[0.07] blur-[110px]'
+        className='pointer-events-none absolute -right-40 bottom-10 -z-10 h-80 w-80 rounded-full bg-blue-500/[0.07] blur-[110px]'
       />
 
       <div className='mx-auto max-w-7xl px-5 sm:px-8'>
-        {/* Section heading */}
+        {/* Section Heading */}
         <motion.div
           variants={fadeUp}
           initial='hidden'
@@ -104,29 +129,32 @@ export default function About() {
           />
         </motion.div>
 
-        {/* Main layout */}
-        <div className='mt-16 grid items-start gap-14 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-20'>
-          {/* LEFT: Sticky profile and introduction */}
+        {/* Main Layout */}
+        <div className='mt-16 grid items-start gap-14 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-16'>
+          {/* LEFT: Profile and Introduction */}
           <motion.aside
             variants={fadeUp}
             initial='hidden'
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
-            className='mx-auto w-full max-w-[360px] self-start lg:sticky lg:top-28'
+            className='mx-auto w-full max-w-[380px] self-start lg:sticky lg:top-28'
           >
-            {/* Profile image */}
+            {/* Profile Image */}
             <div className='group relative'>
+              {/* Cyan and Blue Glow */}
               <div
                 aria-hidden='true'
-                className='absolute -inset-1 rounded-2xl bg-gradient-to-br from-cyan-400/60 via-transparent to-lime-400/60 opacity-60 blur-md transition-opacity duration-500 group-hover:opacity-100'
+                className='absolute -inset-1 rounded-2xl bg-gradient-to-br from-cyan-400/60 via-transparent to-blue-500/60 opacity-60 blur-md transition-opacity duration-500 group-hover:opacity-100'
               />
 
-              <div className='relative overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-white/10 dark:bg-[#11151d]'>
+              <div className='relative overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-white/10 dark:bg-[#080d19]'>
                 <Image
                   src={image}
                   alt='Fayzur Rahman'
-                  className='h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]'
+                  width={600}
+                  height={700}
                   priority={false}
+                  className='h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]'
                 />
               </div>
             </div>
@@ -146,25 +174,69 @@ export default function About() {
                 responsive, and user-friendly web applications.
               </p>
 
-              <div className='mt-5 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/5 px-3 py-2 text-xs font-medium text-zinc-700 dark:text-zinc-300'>
+              {/* Status Badge */}
+              <div className='mt-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-3 py-2 text-xs font-medium text-zinc-700 dark:text-zinc-300'>
                 <span className='relative flex h-2 w-2'>
-                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-500 opacity-60' />
-                  <span className='relative inline-flex h-2 w-2 rounded-full bg-lime-500' />
+                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60' />
+                  <span className='relative inline-flex h-2 w-2 rounded-full bg-cyan-400' />
                 </span>
                 Always learning. Always building.
+              </div>
+
+              {/* Social Links */}
+              <div className='mt-7'>
+                <p className='mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400'>
+                  Connect with me
+                </p>
+
+                <div className='flex flex-wrap items-center gap-3'>
+                  {socialLinks.map((social) => {
+                    const Icon = social.icon
+
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.href}
+                        target={social.name === 'Email' ? undefined : '_blank'}
+                        rel={
+                          social.name === 'Email'
+                            ? undefined
+                            : 'noopener noreferrer'
+                        }
+                        aria-label={social.name}
+                        className='group/link inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white/70 px-3 py-2.5 text-sm font-medium text-zinc-700 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:bg-cyan-400/5 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.025] dark:text-zinc-300 dark:hover:border-cyan-400/40 dark:hover:text-cyan-400'
+                      >
+                        <Icon
+                          size={17}
+                          strokeWidth={1.8}
+                          className='transition-transform duration-300 group-hover/link:scale-110'
+                        />
+
+                        <span>{social.name}</span>
+
+                        {social.name !== 'Email' && (
+                          <ArrowUpRight
+                            size={13}
+                            className='text-zinc-400 transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 group-hover/link:text-cyan-400'
+                          />
+                        )}
+                      </a>
+                    )
+                  })}
+                </div>
               </div>
             </div>
           </motion.aside>
 
-          {/* RIGHT: Scrollable timeline */}
+          {/* RIGHT: Timeline */}
           <div className='relative min-w-0'>
-            {/* Timeline background line */}
+            {/* Timeline Background Line */}
             <div
               aria-hidden='true'
               className='absolute bottom-8 left-[15px] top-8 w-px bg-zinc-200 dark:bg-white/10 sm:left-[19px]'
             />
 
-            {/* Animated timeline line */}
+            {/* Animated Timeline Line */}
             <motion.div
               aria-hidden='true'
               initial={{ scaleY: 0 }}
@@ -175,10 +247,10 @@ export default function About() {
                 ease: 'easeInOut',
               }}
               style={{ transformOrigin: 'top' }}
-              className='absolute bottom-8 left-[15px] top-8 w-px bg-gradient-to-b from-cyan-400 via-lime-400 to-cyan-400 sm:left-[19px]'
+              className='absolute bottom-8 left-[15px] top-8 w-px bg-gradient-to-b from-cyan-400 via-blue-500 to-cyan-400 sm:left-[19px]'
             />
 
-            {/* Timeline cards */}
+            {/* Timeline Cards */}
             <motion.div
               initial='hidden'
               whileInView='visible'
@@ -202,7 +274,7 @@ export default function About() {
                     variants={fadeUp}
                     className='group relative pl-12 sm:pl-14'
                   >
-                    {/* Timeline dot */}
+                    {/* Timeline Dot */}
                     <motion.div
                       initial={{
                         scale: shouldReduceMotion ? 1 : 0.5,
@@ -219,10 +291,10 @@ export default function About() {
                       }}
                       className='absolute left-0 top-6 z-10 flex h-[31px] w-[31px] items-center justify-center rounded-full border border-cyan-400/40 bg-white shadow-[0_0_18px_rgba(34,211,238,0.12)] dark:bg-[#0b1020] sm:left-[4px] sm:h-[39px] sm:w-[39px]'
                     >
-                      <span className='h-2.5 w-2.5 rounded-full bg-gradient-to-br from-cyan-400 to-lime-400 shadow-[0_0_12px_rgba(34,211,238,0.6)]' />
+                      <span className='h-2.5 w-2.5 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 shadow-[0_0_12px_rgba(34,211,238,0.6)]' />
                     </motion.div>
 
-                    {/* Timeline card */}
+                    {/* Timeline Card */}
                     <motion.div
                       whileHover={
                         shouldReduceMotion
@@ -236,15 +308,15 @@ export default function About() {
                         borderColors[index % borderColors.length]
                       }`}
                     >
-                      {/* Hover gradient */}
+                      {/* Hover Gradient */}
                       <div
                         aria-hidden='true'
-                        className='pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/[0.05] via-transparent to-emerald-400/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100'
+                        className='pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/[0.05] via-transparent to-blue-500/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100'
                       />
 
-                      {/* Card content */}
+                      {/* Card Content */}
                       <div className='relative z-10'>
-                        {/* Card label */}
+                        {/* Card Label */}
                         <div className='flex items-center justify-between gap-3'>
                           <span className='text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400'>
                             {item.label}
@@ -255,9 +327,9 @@ export default function About() {
                           </span>
                         </div>
 
-                        {/* Card title */}
+                        {/* Card Title and Icon */}
                         <div className='mt-4 flex items-center gap-3'>
-                          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/10 text-cyan-600 transition-all duration-300 group-hover:scale-110 group-hover:border-lime-500/30 group-hover:bg-lime-500/10 group-hover:text-lime-600 dark:text-cyan-400 dark:group-hover:text-lime-400'>
+                          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/10 text-cyan-600 transition-all duration-300 group-hover:scale-110 group-hover:border-blue-500/30 group-hover:bg-blue-500/10 group-hover:text-blue-600 dark:text-cyan-400 dark:group-hover:text-blue-400'>
                             <Icon size={20} strokeWidth={1.8} />
                           </div>
 
@@ -266,7 +338,7 @@ export default function About() {
                           </h4>
                         </div>
 
-                        {/* Card description */}
+                        {/* Card Description */}
                         <p className='mt-4 text-sm leading-7 text-zinc-600 dark:text-zinc-400'>
                           {item.description}
                         </p>
